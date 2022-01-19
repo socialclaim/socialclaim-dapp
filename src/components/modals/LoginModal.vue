@@ -96,7 +96,6 @@ import AddCircleIcon from 'vue-material-design-icons/Check.vue';
 
 </script>
 <script>
-import "leaflet/dist/leaflet.css";
 export default {
   props: ['group'],
   data() {
