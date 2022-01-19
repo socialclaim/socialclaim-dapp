@@ -14,7 +14,7 @@
         <div class="px-6 pb-6 rounded-t border-b border-gray-600">
           <label for="email-adress-icon" class="block mb-2 pt-6 text-sm font-medium text-gray-400">Name :</label>
           <div class="relative mt-1">
-            <input type="text" v-model="group.title" class="border border-gray-300 text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Group name">
+            <input id="title" type="text" v-model="group.title" class="border border-gray-300 text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Group name">
           </div>
           <label class="block mb-2 pt-6 text-sm font-medium text-gray-400">Platform :</label>
           <select  v-model="group.platform" id="countries" class="border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">

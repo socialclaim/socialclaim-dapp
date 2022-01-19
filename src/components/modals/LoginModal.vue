@@ -40,7 +40,7 @@
            <tr>
              <td class="text-white my-2">I have an invite code</td>
              <td class="flex my-2">
-               <input type="text" v-model="manualToken" id="small-input" placeholder="ABCD000" class="block p-2 w-full rounded-l-lg border-l  sm:text-xs  bg-gray-400 border-gray-600 placeholder-white text-white focus:ring-offset-transparent">
+               <input type="text" v-model="manualToken.value" id="small-input" placeholder="ABCD000" class="block p-2 w-full rounded-l-lg border-l  sm:text-xs  bg-gray-400 border-gray-600 placeholder-white text-white focus:ring-offset-transparent">
                <button v-on:click="setManualToken()" type="submit" class="text-white  focus:ring-4  font-medium rounded-r-lg text-sm px-2  text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
                  <add-circle-icon class=" inline-block align-middle opacity-30" :size="15" />
                </button>
@@ -102,7 +102,7 @@ export default {
     return {
       app_id: process.env.VUE_APP_FB_APP_ID,
       FB: {},
-      manualToken: null,
+      manualToken: {value: null},
       manualTokenError: false,
       model: {},
       scope: {}
@@ -128,10 +128,9 @@ export default {
     },
     setManualToken() {
       var _self = this
-      console.log(this.group)
-      this.$store.dispatch('auth/checkToken', {auth_token: this.manualToken}).then(function(res){
+      this.$store.dispatch('auth/checkToken', {auth_token: this.manualToken.value}).then(function(res){
         if (res === true) {
-          localStorage.token = _self.manualToken
+          localStorage.token = _self.manualToken.value
           _self.$store.dispatch('auth/setToken', {type: 'manual', token: localStorage.token})
           _self.manualTokenError = false
           _self.closeModal()

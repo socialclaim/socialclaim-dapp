@@ -91,7 +91,8 @@
               />
             </svg>
             <input
-                v-model="query"
+                id="query"
+                v-model="query.value"
                 @input="getLocations()"
               type="text"
               class="
@@ -149,32 +150,32 @@
             sm:mr-0 sm:right-auto
           "
         >
-          <a href="#" class="block pr-5">
-            <ShareNetwork
-                network="facebook"
-                url="https://news.vuejs.org/issues/180"
-                title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
-                description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
-                quote="The hot reload is so fast it\'s near instant. - Evan You"
-                hashtags="vuejs,vite"
-            >
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-              >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-            </ShareNetwork>
+<!--          <a href="#" class="block pr-5">-->
+<!--            <ShareNetwork-->
+<!--                network="facebook"-->
+<!--                url="https://news.vuejs.org/issues/180"-->
+<!--                title="Say hi to Vite! A brand new, extremely fast development setup for Vue."-->
+<!--                description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."-->
+<!--                quote="The hot reload is so fast it\'s near instant. - Evan You"-->
+<!--                hashtags="vuejs,vite"-->
+<!--            >-->
+<!--              <svg-->
+<!--                  xmlns="http://www.w3.org/2000/svg"-->
+<!--                  class="h-6 w-6"-->
+<!--                  fill="none"-->
+<!--                  viewBox="0 0 24 24"-->
+<!--                  stroke="currentColor"-->
+<!--              >-->
+<!--                <path-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--                    stroke-width="2"-->
+<!--                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"-->
+<!--                />-->
+<!--              </svg>-->
+<!--            </ShareNetwork>-->
 
-          </a>
+<!--          </a>-->
           <a v-on:click="showCreateGroupModal()" class="block pr-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +224,7 @@ import {NetVueSocialSharing, ShareNetwork} from 'vue-social-sharing'
 export default {
   data() {
     return {
-      query: ''
+      query: {value: ''}
     }
   },
   computed: {
@@ -246,10 +247,10 @@ export default {
       this.$store.dispatch('requestModal/openModal')
     },
     getLocations() {
-      this.$store.dispatch('locations/getLocations', {query: this.query})
+      this.$store.dispatch('locations/getLocations', {query: this.query.value})
     },
     clearLocations() {
-      this.query = ''
+      this.query.value = ''
       this.$store.dispatch('locations/clearLocations')
     },
   }

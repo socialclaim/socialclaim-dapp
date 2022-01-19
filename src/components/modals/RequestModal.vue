@@ -56,7 +56,7 @@
         </div>
         <div class="m-5" v-show="requestModal.textInput">
           <label class="block mb-2 text-sm font-medium text-gray-400">A way to contact you :</label>
-          <input id="message" v-model="contact" rows="4" class="block p-2 w-full text-sm  rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500focus:border-blue-500" placeholder="Leave a way of contact" />
+          <input id="contact" v-model="contact" rows="4" class="block p-2 w-full text-sm  rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500focus:border-blue-500" placeholder="Leave a way of contact" />
         </div>
         <div class="flex items-center p-6 space-x-2 rounded-b ">
           <button v-on:click="submitRequest()" data-modal-toggle="default-modal" type="button" class="focus:ring-4 focus:ring-gray-300 rounded-lg border  text-sm font-medium px-5 py-2.5  focus:z-10 text-white hover:bg-gray-600">Request</button>
