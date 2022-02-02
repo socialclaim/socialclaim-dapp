@@ -63,13 +63,13 @@
 <!--      <h3 class="text-white text-3xl  mt-6">By theme, </h3>-->
     </div>
     <div class=" pt-20 text-center text-white max-w-2xl mx-auto ">
-          <span class="text-xl  underline">Editorial :</span>
-      <p class="text-lg  italic " >Moving to a new city is hard.<br /> Studies showed that the #1 priority for all kind of settlers is to make new friends.
-        With the recent changes happening to the world, more and more people started settling in places far from home,
-        but the online tools available to meet new people are hard to find or very targeted.<br/>
-        In today's world, most remote communities have been built for an economic purpose, either as startup business models, or ways for companies to promote their products.
-        We try to offer a different vision of those concepts with a transparent pricing approach.
-      </p>
+<!--          <span class="text-xl  underline">Editorial :</span>-->
+<!--      <p class="text-lg  italic " >Moving to a new city is hard.<br /> Studies showed that the #1 priority for all kind of settlers is to make new friends.-->
+<!--        With the recent changes happening to the world, more and more people started settling in places far from home,-->
+<!--        but the online tools available to meet new people are hard to find or very targeted.<br/>-->
+<!--        In today's world, most remote communities have been built for an economic purpose, either as startup business models, or ways for companies to promote their products.-->
+<!--        We try to offer a different vision of those concepts with a transparent pricing approach.-->
+<!--      </p>-->
         </div>
 
       </div>
