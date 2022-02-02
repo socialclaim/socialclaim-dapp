@@ -2,12 +2,17 @@ import { createWebHistory, createRouter } from 'vue-router';
 
 const Home = () => import('./pages/Home.vue');
 const Location = () => import('./pages/Location.vue');
-
+const PrivacyPolicy = () => import('./pages/PrivacyPolicy.vue');
 const routes = [
   {
     name: 'Home',
     path: '/',
     component: Home,
+  },
+  {
+    name: 'PrivacyPolicy',
+    path: '/privacy-policy',
+    component: PrivacyPolicy,
   },
   {
     name: 'Location',
