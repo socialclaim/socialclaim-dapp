@@ -14,8 +14,8 @@
     <meta name="twitter:card" content="summary_large_image">
   </Head>
   <div class="w-full h-screen bg-dunes bg-cover bg-center bg-dunes">
-    <TopNavigation />
-    <div class="w-full   bg-center bg-gray-900 opacity-90">
+    <div class="w-full bg-center bg-gray-900 bg-opacity-50 h-screen">
+      <TopNavigation />
     <div class="mx-auto max-w-lg text-center ">
       <h1 class=" pt-16 text-white text-5xl font-bold">Make friends in your new city</h1>
       <div class="relative"  >
