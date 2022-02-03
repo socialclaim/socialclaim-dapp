@@ -17,7 +17,7 @@
   <dashboard-provider>
     <login-modal v-if="authModalStatus === 'opened'" :group="group" />
     <request-modal v-show="requestModalStatus === 'opened'" :location="location" />
-    <div class="bg-gray-900 h-screen overflow-hidden relative" >
+    <div class="bg-primary-900 h-screen overflow-hidden relative" >
       <div class="flex items-start">
         <Overlay />
 

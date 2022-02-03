@@ -4,12 +4,12 @@
       class="
         border-t
         solid
-        border-gray-700
+        border-primary-700
         p-4
         flex
         2xl:items-start
         w-full
-        hover:bg-gray-700
+        hover:bg-primary-700
       "
     >
       <img
@@ -39,10 +39,10 @@
             </svg>
           </div>
         </div>
-        <p class="my-2 text-sm text-gray-400">
+        <p class="my-2 text-sm text-primary-400">
           {{ item.text }}
         </p>
-        <p class="text-right text-gray-400 text-sm">{{ item.date }}</p>
+        <p class="text-right text-primary-400 text-sm">{{ item.date }}</p>
       </div>
     </div>
   </div>

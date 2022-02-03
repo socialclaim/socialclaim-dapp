@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-800 rounded-3xl px-6 pt-6">
+  <div class="bg-primary-800 rounded-3xl px-6 pt-6">
     <div class="flex text-white text-2xl pb-6 font-bold">
       <p>Client Messages</p>
     </div>

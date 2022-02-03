@@ -1,3 +1,10 @@
 <template>
   <router-view />
 </template>
+<style>
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"),
+  url(./fonts/Poppins-Medium.ttf) format("truetype");
+}
+</style>

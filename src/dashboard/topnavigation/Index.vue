@@ -49,7 +49,7 @@
                 h-10
                 p-3
                 pr-2
-                text-gray-500 text-sm
+                text-primary-500 text-sm
                 uppercase
                 w-auto
                 sm:hidden
@@ -78,9 +78,9 @@
                 left-0
                 ml-4
                 pointer-events-none
-                text-gray-500
+                text-primary-500
                 w-4
-                group-hover:text-gray-400
+                group-hover:text-primary-400
 
               "
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@
                 @input="getLocations()"
               type="text"
               class="
-                bg-gray-800
+                bg-primary-800
                 block
                 leading-normal
                 md:pl-10
@@ -105,17 +105,17 @@
                 pr-4
                 ring-opacity-90
                 rounded-2xl
-                text-gray-400
+                text-primary-400
                 w-full
                 focus:border-transparent
                 focus:outline-none
                 focus:ring-2
-                focus:ring-blue-500
+                focus:ring-primary-500
               "
               placeholder="Search"
             />
-            <ul v-if="locations.length > 0" class="bg-white border absolute top-9 border-gray-100 w-11/12 left-3 rounded-l text-black ">
-              <li v-for="location in locations" :key="location.id" class="pl-3 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-gray-800 hover:text-white">
+            <ul v-if="locations.length > 0" class="bg-white border absolute top-9 border-primary-100 w-11/12 left-3 rounded-l text-black ">
+              <li v-for="location in locations" :key="location.id" class="pl-3 pr-2 py-1 border-b-2 border-primary-100 relative cursor-pointer hover:bg-primary-800 hover:text-white">
                 <router-link :to="{ name: 'Location', params: { slug: location.slug }}">
                   <div class="w-full h-full" v-on:click="clearLocations()">
                     <country-flag :country='location.geonames_feature.country_code' size='small'/>
@@ -130,7 +130,7 @@
                   </div>
                 </router-link>
               </li>
-              <li class="text-xs md:text-sm opacity-70 font-semibold text-gray-400  pl-3 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-gray-800 hover:text-white">
+              <li class="text-xs md:text-sm opacity-70 font-semibold text-primary-400  pl-3 pr-2 py-1 border-b-2 border-primary-100 relative cursor-pointer hover:bg-primary-800 hover:text-white">
                 <a v-on:click="openRequestModalSuggest()">You city not in the list ? Request it !</a>
               </li>
             </ul>

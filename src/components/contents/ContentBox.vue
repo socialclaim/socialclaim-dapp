@@ -1,16 +1,16 @@
 <template>
   <group-invite-modal v-show="groupModalStatus === 'opened'" :invite-url="group.invite_url" />
-  <tr class="bg-gray-800">
+  <tr class="bg-primary-800">
     <td class="py-4 px-6 text-sm font-medium  whitespace-nowrap text-white">
       <h2>{{ item.title }}</h2>
-      <p class="text-xs text-gray-400 italic" v-if="item.group_sponsor">
+      <p class="text-xs text-primary-400 italic" v-if="item.group_sponsor">
         <a :href="item.group_sponsor.url">by {{item.group_sponsor.name}}</a>
       </p>
     </td>
-    <td v-if="item.type" class="py-4 px-6 text-sm  whitespace-nowrap text-gray-400">
+    <td v-if="item.type" class="py-4 px-6 text-sm  whitespace-nowrap text-primary-400">
       {{ item.type }}
     </td>
-<!--    <td class="py-4 px-6 text-sm  whitespace-nowrap text-gray-400">-->
+<!--    <td class="py-4 px-6 text-sm  whitespace-nowrap text-primary-400">-->
 <!--         <span class="text-xs opacity-50">-->
 <!--                <account-icon class="inline-block h-xs align-middle" />12 ready to hangout-->
 <!--              <span>-->
@@ -19,11 +19,11 @@
 <!--      </span>-->
 <!--    </td>-->
 
-    <td class="py-4 px-6 text-sm  whitespace-nowrap text-gray-400">
+    <td class="py-4 px-6 text-sm  whitespace-nowrap text-primary-400">
       {{ item.platform }}
     </td>
     <td class="py-4 px-6 text-sm font-medium  whitespace-nowrap">
-      <a href="#" v-on:click="getGroup()" class=" hover:text-blue-900 text-blue-500 hover:underline">Join <span v-if="item.private">🔒</span></a>
+      <a href="#" v-on:click="getGroup()" class=" hover:text-primary-900 text-primary-500 hover:underline">Join <span v-if="item.private">🔒</span></a>
     </td>
   </tr>
 </template>

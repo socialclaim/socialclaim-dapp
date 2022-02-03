@@ -5,31 +5,31 @@
     <div class=" py-2  overflow-x-auto">
       <div class="hidden md:block shadow-md rounded-lg ">
         <table class="  min-w-full">
-          <thead class="bg-gray-700" >
+          <thead class="bg-primary-700" >
           <tr>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Official NomadGroups.io groups :
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Focus
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Platform
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Link
             </th>
           </tr>
           </thead>
           <tbody>
           <div v-if="!managed_groups || managed_groups.length == 0" class="p-2">
-            <a href="#" class="flex block p-2 max-w-sm rounded-lg border align-middle shadow-md  bg-gray-800 border-gray-700 hover:bg-gray-700">
+            <a href="#" class="flex block p-2 max-w-sm rounded-lg border align-middle shadow-md  bg-primary-800 border-primary-700 hover:bg-primary-700">
               <div class="flex-none">
                 <exclamation-thick-icon :size="64"  fill-color="#FFFFFF" class="inline-block"/>
               </div>
               <div class="flex-grow">
                 <span class="mb-2 text-2xl font-bold tracking-tight text-white">No groups here yet !</span>
-                <div class="font-normal text-gray-400">Click this to request creation of a chat for this city !</div>
+                <div class="font-normal text-primary-400">Click this to request creation of a chat for this city !</div>
               </div>
             </a>
           </div>
@@ -39,32 +39,32 @@
       </div>
       <div class="hidden md:block mt-10 shadow-md rounded-lg">
         <table class="min-w-full">
-          <thead class="bg-gray-700" >
+          <thead class="bg-primary-700" >
           <tr>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Other groups :
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Focus
             </th>
 
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Platform
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Link
             </th>
           </tr>
           </thead>
           <tbody>
           <div v-if="(!public_groups || public_groups.length == 0) && !groupSubmitted && !dismissSubmitted" class="p-2">
-            <a href="#" v-on:click="showCreateGroupModal()" class="flex block p-2 max-w-sm rounded-lg border align-middle shadow-md  bg-gray-800 border-gray-700 hover:bg-gray-700">
+            <a href="#" v-on:click="showCreateGroupModal()" class="flex block p-2 max-w-sm rounded-lg border align-middle shadow-md  bg-primary-800 border-primary-700 hover:bg-primary-700">
               <div class="flex-none">
                 <exclamation-thick-icon :size="64"  fill-color="#FFFFFF" class="inline-block"/>
               </div>
               <div class="flex-grow">
                 <span class="mb-2 text-2xl font-bold tracking-tight text-white">No groups here yet !</span>
-                <div class="font-normal text-gray-400">Click this to request creation of a chat for this city !</div>
+                <div class="font-normal text-primary-400">Click this to request creation of a chat for this city !</div>
               </div>
             </a>
           </div>
@@ -86,8 +86,8 @@
           </div>
 
           <content-box  v-for="item in public_groups" :key="item.id" :item="item" />
-          <tr v-show="public_groups && public_groups.length > 0"  class="bg-gray-800">
-            <td class="py-4 px-6 text-sm font-medium italic  underline whitespace-nowrap text-gray-400">
+          <tr v-show="public_groups && public_groups.length > 0"  class="bg-primary-800">
+            <td class="py-4 px-6 text-sm font-medium italic  underline whitespace-nowrap text-primary-400">
               <a  v-on:click="showCreateGroupModal()" class="cursor-pointer">List your group</a>
             </td>
           </tr>
@@ -95,16 +95,16 @@
         </table>
       </div>
       <div class="md:hidden">
-        <div scope="col" class=" text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+        <div scope="col" class=" text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
           Official NomadGroups.io groups :
         </div>
 
-        <div v-for="item in managed_groups" :key="item.id" :item="item"  class="mt-4 p-2 w-full text-center rounded-lg border shadow-md sm:p-8 bg-gray-800 border-gray-700">
+        <div v-for="item in managed_groups" :key="item.id" :item="item"  class="mt-4 p-2 w-full text-center rounded-lg border shadow-md sm:p-8 bg-primary-800 border-primary-700">
           <group-invite-modal v-show="groupModalStatus === 'opened'" :invite-url="item.invite_url" />
           <h3 class="mb-2 text-xl font-bold text-white">{{ item.title }}</h3>
-          <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">Focus: {{ item.type }}, Platform: {{ item.platform }}</p>
+          <p class="mb-5 text-base text-primary-500 sm:text-lg dark:text-primary-400">Focus: {{ item.type }}, Platform: {{ item.platform }}</p>
           <div class="justify-center items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-            <a v-on:click="getGroup(item.id)"  class="w-full sm:w-auto flex  focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
+            <a v-on:click="getGroup(item.id)"  class="w-full sm:w-auto flex  focus:ring-primary-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 bg-primary-700 hover:bg-primary-600 focus:ring-primary-700">
               <div class="text-left">
                 <div class="-mt-1 font-sans text-sm font-semibold">
                   Join now <span v-if="item.private">🔒</span></div>
@@ -113,15 +113,15 @@
           </div>
         </div>
 
-        <div scope="col" class="mt-4 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+        <div scope="col" class="mt-4 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
           Other groups :
         </div>
 
-        <div v-for="item in public_groups" :key="item.id" :item="item"  class="mt-4 p-2 w-full text-center rounded-lg border shadow-md sm:p-8 bg-gray-800 border-gray-700">
+        <div v-for="item in public_groups" :key="item.id" :item="item"  class="mt-4 p-2 w-full text-center rounded-lg border shadow-md sm:p-8 bg-primary-800 border-primary-700">
           <h3 class="mb-2 text-xl font-bold text-white">New York City hangouts (Today) by NomadGroups.io</h3>
-          <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">Focus: Hangouts, Platform: telegram</p>
+          <p class="mb-5 text-base text-primary-500 sm:text-lg dark:text-primary-400">Focus: Hangouts, Platform: telegram</p>
           <div class="justify-center items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-            <a href="#" class="w-full sm:w-auto flex  focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
+            <a href="#" class="w-full sm:w-auto flex  focus:ring-primary-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 bg-primary-700 hover:bg-primary-600 focus:ring-primary-700">
               <div class="text-left">
                 <div class="-mt-1 font-sans text-sm font-semibold">Join now 🔒</div>
               </div>
@@ -130,13 +130,13 @@
         </div>
 
         <div v-if="!public_groups || public_groups.length == 0" class="p-2">
-          <a href="#" class="flex block p-2 max-w-sm rounded-lg border align-middle shadow-md  bg-gray-800 border-gray-700 hover:bg-gray-700">
+          <a href="#" class="flex block p-2 max-w-sm rounded-lg border align-middle shadow-md  bg-primary-800 border-primary-700 hover:bg-primary-700">
             <div class="flex-none">
               <exclamation-thick-icon :size="64"  fill-color="#FFFFFF" class="inline-block"/>
             </div>
             <div class="flex-grow">
               <span class="mb-2 text-2xl font-bold tracking-tight text-white">No groups here yet !</span>
-              <div class="font-normal text-gray-400">Click this to request creation of a chat for this city !</div>
+              <div class="font-normal text-primary-400">Click this to request creation of a chat for this city !</div>
             </div>
           </a>
         </div>
@@ -145,21 +145,21 @@
 
       <div v-if="parent_groups && parent_groups.length > 0" class="hidden md:block mt-10 shadow-md rounded-lg">
         <table class="min-w-full">
-          <thead class="bg-gray-700" >
+          <thead class="bg-primary-700" >
           <tr>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Groups in   <span class="font-bold">
               {{ location.geonames_parent_feature.name }}<country-flag class="pt-1" :country='location.geonames_feature.country_code' size='small' />
             </span> :
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Focus
             </th>
 
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Platform
             </th>
-            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-gray-400">
+            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left  uppercase text-primary-400">
               Link
             </th>
           </tr>
