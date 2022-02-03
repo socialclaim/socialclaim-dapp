@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full  relative">
+  <div class="h-full  relative" v-if="continent">
     <div v-show="submitted === false"  class="absolute w-full h-full bg-black bg-opacity-80" style="z-index: 9000">
       <div class="mt-32 max-w-xl  mx-auto   text-3xl" >
         <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">

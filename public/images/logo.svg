@@ -13,7 +13,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/Users/yann/Desktop/bitmap.png"
+   inkscape:export-xdpi="228"
+   inkscape:export-ydpi="228">
   <defs
      id="defs2">
     <rect
@@ -2715,7 +2718,7 @@
      inkscape:cx="-252.31157"
      inkscape:cy="291.47892"
      inkscape:document-units="mm"
-     inkscape:current-layer="g6788"
+     inkscape:current-layer="g5342-1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
