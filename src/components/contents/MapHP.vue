@@ -1,8 +1,8 @@
 <template>
-  <div class="h-full  relative" v-if="continent">
+  <div class="h-full  relative" >
     <div v-show="submitted === false"  class="absolute w-full h-full bg-black bg-opacity-80" style="z-index: 9000">
       <div class="mt-32 max-w-xl  mx-auto   text-3xl" >
-        <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
+        <div  class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -17,34 +17,32 @@
               </div>
               <form class="mt-12 px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" v-on:submit.prevent="getDestinations()">
                 <div>
-
-
-                  <label for="continents" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select your continent</label>
-                  <select v-model="continent" id="continents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                      <option v-for="option in continentOptions" v-bind:value="option.value">
-                        {{ option.text }}
-                      </option>
-                    </select>
-                </div>
-                <div>
-                  <label for="cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select your cost of living: </label>
-                  <select id="cost" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-                    <option v-for="option in costOptions" v-bind:value="option.value">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select your continent</label>
+                  <select id="continent" v-model="continent"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option v-for="option in continentOptions" :value="option.value" :key="option.value">
                       {{ option.text }}
                     </option>
                   </select>
                 </div>
                 <div>
-                  <label for="adventure" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">How adventurous do you feel ? </label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select your cost of living: </label>
+                  <select v-model="cost"  id="cost" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    <option v-for="option in costOptions" v-bind:value="option.value" :key="option.value">
+                      {{ option.text }}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">How adventurous do you feel ? </label>
                   <select v-model="adventure" id="adventure" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-                    <option v-for="option in adventureOptions" v-bind:value="option.value">
+                    <option v-for="option in adventureOptions" v-bind:value="option.value" :key="option.value">
                       {{ option.text }}
                     </option>
                   </select>
                 </div>
                 <div>
-                  <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                    <input type="checkbox" id="toggle-example-checked" class="sr-only" v-model="hot">
+                  <label  class="flex relative items-center mb-4 cursor-pointer">
+                    <input type="checkbox" id="hot" class="sr-only" v-model="hot">
                     <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
                     <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Only warm countries right now</span>
                   </label>
@@ -69,7 +67,7 @@
                     </div>
                   </div>
                 </div>
-                <div v-show="error == true" class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                <div v-show="error === true" class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                   <span class="font-medium">No results for your search</span> Try to broaden your criterias
                 </div>
                 <button  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get me a fresh destination !</button>
@@ -82,7 +80,7 @@
     </div>
     <div v-if="submitted === true && found === false"  class="absolute w-full h-full opacity-80" style="z-index: 9000">
       <div class="mt-32 max-w-xl  mx-auto   text-3xl" >
-        <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
+        <div class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
             <!-- Modal content -->
             <Vue3Lottie  :animationData="Roulette" :width="640" />
@@ -90,32 +88,19 @@
         </div>
       </div>
     </div>
-
-
-    <div  v-if="found === true"  class="absolute w-full h-full" style="z-index: 9000">
+    <div v-if="found === true" class="absolute w-full h-full" style="z-index: 9000">
       <div class="mt-10 max-w-xl  mx-auto   text-3xl" >
         <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
-
-
-
             <div class="max-w-sm text-white rounded-lg px-4 py-4 mx-6 mb-4 bg-cover bg-center bg-gradient-to-b " :style="{'background-image': `url(${locations[0].picture.service_url})`}">
-<!--              <a href="#">-->
-<!--                <img class="p-8 rounded-t-lg" :src="locations[0].picture.service_url" alt="product image" />-->
-<!--              </a>-->
+              <!--              <a href="#">-->
+              <!--                <img class="p-8 rounded-t-lg" :src="locations[0].picture.service_url" alt="product image" />-->
+              <!--              </a>-->
               <div class="px-5 pb-5 bg-black bg-opacity-40  rounded-3xl" v-if="locations[0]">
-                  <h3 class="text-xl font-semibold tracking-tight text-white text-center pt-5">You are going to :<br /><span class="ml-2 mr-2 text-2xl"><span v-if="!locations[0].geonames_alternate_name">{{ locations[0].geonames_feature.name }} !</span>
+                <h3 class="text-xl font-semibold tracking-tight text-white text-center pt-5">You are going to :<br /><span class="ml-2 mr-2 text-2xl"><span v-if="!locations[0].geonames_alternate_name">{{ locations[0].geonames_feature.name }} !</span>
               <span v-if="locations[0].geonames_alternate_name">{{locations[0].geonames_alternate_name.alternate_name}} !</span></span>
-                    <span v-if="locations[0].geonames_parent_feature && locations[0].geonames_parent_feature.locations[0]" class="mr-2 text-sm font-light"><span class=" ">Part of  {{ locations[0].geonames_parent_feature.name }}</span></span>
-                    <span v-if="locations[0].geonames_parent_feature && !locations[0].geonames_parent_feature.locations[0]" class="mr-2 text-sm font-light">{{ locations[0].geonames_parent_feature.name }}</span></h3>
-<!--                <div class="flex items-center mt-2.5 mb-5">-->
-<!--                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>-->
-<!--                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>-->
-<!--                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>-->
-<!--                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>-->
-<!--                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>-->
-<!--                  <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>-->
-<!--                </div>-->
+                  <span v-if="locations[0].geonames_parent_feature && locations[0].geonames_parent_feature.locations[0]" class="mr-2 text-sm font-light"><span class=" ">Part of  {{ locations[0].geonames_parent_feature.name }}</span></span>
+                  <span v-if="locations[0].geonames_parent_feature && !locations[0].geonames_parent_feature.locations[0]" class="mr-2 text-sm font-light">{{ locations[0].geonames_parent_feature.name }}</span></h3>
                 <div class="flex justify-between items-center mt-5">
                   <a href="https://flights.google.com" class="text-white bg-primary hover:bg-primaryLight focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Book a flight</a>
 
@@ -136,7 +121,7 @@
       <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ></l-tile-layer>
-      <l-marker v-for="location in locations" :lat-lng="[location.geonames_feature.latitude, location.geonames_feature.longitude]" >
+      <l-marker v-for="location in locations" :lat-lng="[location.geonames_feature.latitude, location.geonames_feature.longitude]" :key="location.id">
         <l-tooltip :options="{permanent: true}">
           <h1 class="text-xl md:text-xl font-bold">
             <span>
@@ -152,32 +137,26 @@
   </div>
 </template>
 
-<script setup>
-import CountryFlag from 'vue-country-flag-next'
-import Vue3Lottie from 'vue3-lottie'
-import Roulette from '@/assets/animation.json'
-</script>
-
 <script>
 import {
   LMap,
-  LIcon,
   LTileLayer,
   LMarker,
-  LControlLayers,
   LTooltip,
-  LPopup,
-  LPolyline,
-  LPolygon,
-  LRectangle,
 } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
+import CountryFlag from 'vue-country-flag-next'
+import Vue3Lottie from 'vue3-lottie'
+import Roulette from '@/assets/animation.json'
+
 export default {
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LTooltip
+    LTooltip,
+    CountryFlag,
+    Vue3Lottie
   },
   data() {
     return {
@@ -187,7 +166,7 @@ export default {
         {text: 'Get me somewhere easy', value: 'easy'},
         {text: 'I want a little adventure', value: 'medium'},
         {text: 'I want to be out of place', value: 'hard'}
-        ],
+      ],
       costOptions: [
         {text: 'Any', value: 'Any'},
         {text: 'Under 1000$', value: '1000'},
@@ -210,7 +189,7 @@ export default {
       error: false,
       hot: false,
       cost: 'Any',
-      adventure: 'easy',
+      adventure:  'easy',
       continent: 'Any',
       coords: this.coordinates,
       center: [0, 0],
@@ -235,7 +214,7 @@ export default {
             }, 1000)
           }, 5000)
           const display = s => _self.locations = [s];
-          const delayLoop = (fn, delay) => {
+          const delayLoop = () => {
             return (name, i) => {
               setTimeout(() => {
                 display(name);
@@ -243,7 +222,7 @@ export default {
             }
           };
           _self.mapLocations.forEach(delayLoop(display, 1000));
-        _self.error = false
+          _self.error = false
           _self.submitted = true
         } else {
           _self.error = true
