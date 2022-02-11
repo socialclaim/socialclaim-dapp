@@ -66,7 +66,7 @@ export default {
     },
     getDestinations({ commit }, event) {
       return new Promise((resolve, reject) => {
-        var url = `${process.env.VUE_APP_API_URL}/locations?continent=${event}`;
+        var url = `${process.env.VUE_APP_API_URL}/locations?continent=${event.continent}&hot=${event.hot}&adventure=${event.adventure}&cost=${event.cost}`;
         return axios.get(url).then((locations) => {
           commit('GET_geo_locations', {locations: locations.data})
           resolve(locations)
