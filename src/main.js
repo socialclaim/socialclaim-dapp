@@ -12,6 +12,8 @@ import moduleSubmitGroupModal from './store/modules/ui/submitGroupModal'
 import moduleRequestModal from './store/modules/ui/requestModal'
 import moduleRequests from './store/modules/requests'
 import { createHead } from '@vueuse/head'
+import { Vue3Mq } from "vue3-mq";
+
 const head = createHead()
 import './index.css'
 
@@ -40,6 +42,6 @@ const store = createStore({
   }
 });
 
-const app = createApp(App).use(router).use(store).use(head).mount('#app');
+const app = createApp(App).use(router).use(store).use(head).use(Vue3Mq).mount('#app');
 
 
