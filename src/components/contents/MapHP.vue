@@ -100,7 +100,7 @@
       <div class="mt-10 max-w-xl mx-auto text-3xl" >
         <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
-            <div class="max-w-sm text-white rounded-xl  mx-6 mb-4 bg-cover bg-center bg-gradient-to-b " :style="{'background-image': `url(${locations[0].picture.service_url})`}">
+            <div class="max-w-sm text-white rounded-xl  mx-6 mb-4 bg-cover bg-center bg-gradient-to-b bg-gray-800 " :style="{'background-image': `url(${locations[0].picture.service_url})`}">
               <!--              <a href="#">-->
               <!--                <img class="p-8 rounded-t-lg" :src="locations[0].picture.service_url" alt="product image" />-->
               <!--              </a>-->
