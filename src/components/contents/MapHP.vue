@@ -218,6 +218,7 @@ export default {
       continentOptions: [
         {text: 'Any', value: 'Any'},
         {text: 'Africa', value: 'Africa'},
+        {text: 'Asia', value: 'Asia'},
         {text: 'European continent', value: 'Europe'},
         {text: 'North America', value: 'North America'},
         {text: 'South America', value: 'South America'},
