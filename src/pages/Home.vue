@@ -1,16 +1,16 @@
 <template>
   <Head>
-    <title>Make friends in your new city</title>
+    <title>Find your next nomad destination</title>
     <html lang="en"></html>
-    <meta name="description" content="All the groups and communities of digital nomads, expats, and locals">
+    <meta name="description" content="Set some basic criterias, and let chance decide what your next destination will be !">
     <!-- Social -->
-    <meta property="og:title" :content="'Make friends in your new city'">
-    <meta property="og:description" content="All the groups and communities of digital nomads, expats, and locals">
-    <meta property="og:image" content="https://i.imgur.com/ziGWszn.png">
+    <meta property="og:title" :content="'Find your next nomad destination'">
+    <meta property="og:description" content="Set some basic criterias, and let chance decide what your next destination will be !">
+    <meta property="og:image" content="https://i.imgur.com/NcSeNdc.png">
     <!-- Twitter -->
-    <meta name="twitter:title" content="Make friends in your new city">
-    <meta name="twitter:description" content="All the groups and communities of digital nomads, expats, and locals">
-    <meta name="twitter:image" content="https://i.imgur.com/ziGWszn.png">
+    <meta name="twitter:title" content="Find your next nomad destination">
+    <meta name="twitter:description" content="Set some basic criterias, and let chance decide what your next destination will be !">
+    <meta name="twitter:image" content="https://i.imgur.com/NcSeNdc.png">
     <meta name="twitter:card" content="summary_large_image">
   </Head>
   <div class="w-full h-screen ">
