@@ -1,7 +1,7 @@
 <template>
   <div class="h-full  relative" >
     <div v-show="submitted === false"  class="absolute w-full h-full bg-black bg-opacity-80" style="z-index: 9000">
-      <div class="md:mt-32 max-w-xl  mx-auto   text-3xl" >
+      <div class="md:mt-8 max-w-xl  mx-auto   text-3xl" >
         <div  class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
             <!-- Modal content -->
@@ -17,7 +17,7 @@
               </div>
               <form class="mt-4 md:mt-12 px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" v-on:submit.prevent="getDestinations()">
                 <div>
-                  <label  class="block md:mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select your continent</label>
+                  <label  class="block md:mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select your continent:</label>
                   <select id="continent" v-model="continent"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option v-for="option in continentOptions" :value="option.value" :key="option.value">
                       {{ option.text }}
@@ -100,7 +100,7 @@
       <div class="mt-10 max-w-xl mx-auto text-3xl" >
         <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
-            <div class="max-w-sm text-white rounded-xl  mx-6 mb-4 bg-cover bg-center bg-gradient-to-b bg-gray-800 " :style="{'background-image': `url(${locations[0].picture.service_url})`}">
+            <div class="max-w-sm text-white rounded-xl  mx-6 mb-4  " :style="{'background-image': `url(${locations[0].picture.service_url})`}">
               <!--              <a href="#">-->
               <!--                <img class="p-8 rounded-t-lg" :src="locations[0].picture.service_url" alt="product image" />-->
               <!--              </a>-->
@@ -118,9 +118,8 @@
 
               </div>
                 <div class="grid grid-rows-2 gap-2 md:flex justify-between items-center mt-2 md:mt-5 mx-5">
-                  <a href="https://flights.google.com" class="text-white bg-primary hover:bg-primaryLight focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">🛫 Book a flight</a>
-
-                  <a :href="'https://nomadgroups.io/'+locations[0].slug" class="text-white bg-primary hover:bg-primaryLight focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">🔎 Find nomads there</a>
+                  <a :href="'https://nomadgroups.io/'+locations[0].slug" class="text-white bg-primary hover:bg-primaryLight focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">🔎 Find nomads there</a>
+                  <a href="https://calendly.com/nomadroulette/" class="text-white bg-primary hover:bg-primaryLight focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">👄 Give feedback</a>
                 </div>
               <div >
 
@@ -153,16 +152,18 @@
       <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ></l-tile-layer>
-      <l-marker v-for="location in locations" :lat-lng="[location.geonames_feature.latitude, location.geonames_feature.longitude]" :key="location.id">
-        <l-tooltip :options="{permanent: true}">
-          <h1 class="text-xl md:text-xl font-bold">
-            <span>
+      <l-marker v-for="location in locations" :lat-lng="[location.geonames_feature.latitude, location.geonames_feature.longitude]" :key="location.id" >
+        <l-tooltip :options="{permanent: true}" :style="{'background-image': `url(${location.picture.service_url})`}" class="rounded-md h-24 bg-cover bg-center align-middle">
+          <div class="w-full h-full bg-black bg-opacity-20 rounded-md">
+            <h1 class="text-xl md:text-xl font-bold ml-4 pt-6 text-white ">
+            <span >
             <country-flag  :country='location.geonames_feature.country_code' size='normal' /></span>
-            <span class="ml-2 mr-2"><span v-if="!location.geonames_alternate_name">{{ location.geonames_feature.name }}</span>
+              <span class="p-4 ml-2 mr-2"><span v-if="!location.geonames_alternate_name">{{ location.geonames_feature.name }}</span>
               <span v-if="location.geonames_alternate_name">{{location.geonames_alternate_name.alternate_name}}</span>, {{ location.geonames_feature.country_code }} </span>
-            <span v-if="location.geonames_parent_feature && location.geonames_parent_feature.location" class="mr-2 text-sm font-light"><span class=" ">Part of  {{ location.geonames_parent_feature.name }}</span></span>
-            <span v-if="location.geonames_parent_feature && !location.geonames_parent_feature.location" class="mr-2 text-sm font-light">{{ location.geonames_parent_feature.name }}</span>
-          </h1>
+              <span v-if="location.geonames_parent_feature && location.geonames_parent_feature.location" class="mr-2 text-sm font-light"><span class=" ">Part of  {{ location.geonames_parent_feature.name }}</span></span>
+              <span v-if="location.geonames_parent_feature && !location.geonames_parent_feature.location" class="mr-2 text-sm font-light">{{ location.geonames_parent_feature.name }}</span>
+            </h1>
+          </div>
         </l-tooltip>
       </l-marker>
     </l-map>
@@ -208,12 +209,12 @@ export default {
       ],
       costOptions: [
         {text: 'Any', value: 'Any'},
-        {text: 'Under 1000$', value: '1000'},
-        {text: 'Under 1500$', value: '1500'},
-        {text: 'Under 2000$', value: '2000'},
-        {text: 'Under 2500$', value: '2500'},
+        {text: 'Under 4000$', value: '4000'},
         {text: 'Under 3000$', value: '3000'},
-        {text: 'Under 4000$', value: '4000'}
+        {text: 'Under 2500$', value: '2500'},
+        {text: 'Under 2000$', value: '2000'},
+        {text: 'Under 1500$', value: '1500'},
+        {text: 'Under 1000$', value: '1000'},
       ],
       continentOptions: [
         {text: 'Any', value: 'Any'},

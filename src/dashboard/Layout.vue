@@ -27,7 +27,6 @@
               class="
             h-screen
             overflow-auto
-            pb-36
             pt-4
             px-2
             md:pb-8 md:pt-4
