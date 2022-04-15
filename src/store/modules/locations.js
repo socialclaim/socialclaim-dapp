@@ -27,6 +27,15 @@ export default {
         },
         GET_geo_locations(state, event) {
           state.geo_locations = event.locations
+          state.geo_locations.forEach(function(loc){
+            if (loc.picture) {
+              fetch(loc.picture.service_url).then(function(blob){
+                blob.blob().then(function(b){
+                  loc.blob = URL.createObjectURL(b)
+                })
+              })
+            }
+          })
         },
         SET_requests() {
           // state.create_requests = state.create_requests.push({})

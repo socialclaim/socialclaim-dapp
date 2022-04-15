@@ -100,7 +100,7 @@
       <div class="mt-10 max-w-xl mx-auto text-3xl" >
         <div id="authentication-modal" class="overflow-y-auto overflow-x-hidden justify-center items-center h-modal md:h-full md:inset-0">
           <div class="relative px-4 w-full h-full md:h-auto">
-            <div class="max-w-sm text-white rounded-xl  mx-6 mb-4 bg-gray-300 " v-if="locations[0]" :style="{'background-image': (locations[0].picture ? `url(${locations[0].picture.service_url})` : '')}">
+            <div class="max-w-sm text-white rounded-xl  mx-6 mb-4 bg-gray-300 " v-if="locations[0]" :style="{'background-image': (locations[0].blob ? `url(${locations[0].blob})` : '')}">
               <!--              <a href="#">-->
               <!--                <img class="p-8 rounded-t-lg" :src="locations[0].picture.service_url" alt="product image" />-->
               <!--              </a>-->
@@ -153,7 +153,7 @@
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ></l-tile-layer>
       <l-marker v-for="location in locations" :lat-lng="[location.geonames_feature.latitude, location.geonames_feature.longitude]" :key="location.id" >
-        <l-tooltip :options="{permanent: true}" :style="{'background-image': (location.picture ? `url(${location.picture.service_url})` : '')}" class="rounded-md h-24 bg-cover bg-center align-middle">
+        <l-tooltip :options="{permanent: true}" :style="{'background-image': (location.blob ? `url(${location.blob})` : '')}" class="rounded-md h-24 bg-cover bg-center align-middle">
           <div class="w-full h-full bg-black bg-opacity-20 rounded-md">
             <h1 class="text-xl md:text-xl font-bold ml-4 pt-6 text-white ">
             <span >
