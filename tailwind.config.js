@@ -1,25 +1,24 @@
 module.exports = {
-  darkMode: 'class', // or 'media' or 'class'
+  variants: {
+
+  },
   theme: {
     fontFamily: {
       sans: ['"Poppins"']
     },
     extend: {
       colors: {
-        primary: '#61adc3ff',
-        primaryLight: '#d2eaf3'
-      },
-      backgroundImage: () => ({
-        dunes: "url('/images/bg.jpg')",
-      })
-    }
-  },
-  variants: {
-    extend: {
-
+        primary: '#000',
+        secondary: '#0E73D3',
+        secondarymedium: '#3382d0',
+        secondarylight: '#c6d6e5',
+        secondarysuperlight: '#f0f4ff',
+        lightbrown: '#a33c02',
+        tertiary: '#444444',
+        unclaimed: '#fb8500ff'
+      }
     }
   },
   plugins: [
-    require('flowbite/plugin')
-  ],
-};
+  ]
+}

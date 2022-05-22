@@ -2,19 +2,10 @@ import { createApp } from 'vue';
 import { createStore } from 'vuex'
 import App from './App.vue';
 import router from './routes';
-import moduleLocations from './store/modules/locations.js'
-import moduleAuth from './store/modules/auth.js'
-import moduleGroups from './store/modules/groups.js'
-import moduleAuthModal from './store/modules/ui/authModal'
-import moduleGroupModal from './store/modules/ui/groupModal'
-import moduleGroupTypes from './store/modules/groupTypes'
-import moduleSubmitGroupModal from './store/modules/ui/submitGroupModal'
-import moduleRequestModal from './store/modules/ui/requestModal'
-import moduleRequests from './store/modules/requests'
+import moduleWeb3 from './store/modules/web3.js'
 import { createHead } from '@vueuse/head'
 import VueGtag from "vue-gtag-next";
 import { Vue3Mq } from "vue3-mq";
-
 
 const head = createHead()
 import './index.css'
@@ -32,15 +23,7 @@ const store = createStore({
     }
   },
   modules: {
-    locations: moduleLocations,
-    auth: moduleAuth,
-    groups: moduleGroups,
-    authModal: moduleAuthModal,
-    groupModal: moduleGroupModal,
-    requestModal: moduleRequestModal,
-    submitGroupModal: moduleSubmitGroupModal,
-    groupTypes: moduleGroupTypes,
-    requests: moduleRequests
+    web3: moduleWeb3
   }
 });
 
