@@ -41,151 +41,147 @@
 </style>
 <template>
   <section >
-    <button v-on:click="nextStep">next step</button>
     <div class="grid grid-cols-1 md:grid-cols-2 px-4  pb-20 gap-6 mx-auto max-w-screen-lg">
-    <div class="mt-4" v-if="step===0">
-      <div class="hidden lg:block font-extrabold leading-tight text-4xl mt-16 lg:text-5xl  md:h-48">
-
-        <b>Let the crpyto 🌎 know you are the <span class="text-secondary underline">Right Person</span></b>
-
-
-<!--        <b><vue-typer class="no-caret" :repeat='0' text="Let the crpyto 🌎        know you are the     "  initial-action='typing' :type-delay=40></vue-typer></b><br />-->
-<!--        <b><vue-typer :pre-type-delay="1700" class="text-secondary no-caret" :repeat='0' text="Right Person"  initial-action='typing' :type-delay=40></vue-typer></b>-->
-<!--        <b><vue-typer :pre-type-delay="2000" class="  no-caret" :repeat='0' text=" 🔒"  initial-action='typing' :type-delay=40></vue-typer></b><br/>-->
-      </div>
-      <div class="lg:hidden font-extrabold leading-tight text-4xl mt-5 lg:text-5xl md:h-32">
-        <b>Your social media presence <span class="text-secondary underline">VERIFIED</span></b>
-      </div>
-
-      <h2 class="text-md mt-5 md:mt-0 md:text-xl">Link your BSC wallet to your social media profiles</h2>
-<!--      <ul class="list-disc ml-4" data-aos="zoom-in" data-aos-delay=1100>-->
-<!--        <li>-->
-<!--          <h2 class="text-3xl md:text-xl font-bold" >-->
-<!--            <span class="text-secondary"></span>{{$t('hero.line2.start')}} <span class="underline">{{$t('hero.line2.middle')}}</span> {{$t('hero.line2.middle2')}}-->
-<!--            <span class="text-secondary">{{$t('hero.line2.end')}}</span>-->
-<!--          </h2>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <h2 class="text-3xl md:text-xl font-bold" data-aos="zoom-in" >-->
-<!--            <span class="text-secondary"></span>{{$t('hero.line3.start')}} <span class="underline">{{$t('hero.line3.middle')}}</span> {{$t('hero.line3.middle2')}}-->
-<!--            <span class="text-secondary">{{$t('hero.line3.end')}}</span>-->
-<!--          </h2>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <h2 class="text-3xl md:text-xl font-bold" data-aos="zoom-in" >-->
-<!--            <span class="text-secondary"></span>{{$t('hero.line4.start')}} <span class="underline">{{$t('hero.line4.middle')}}</span> {{$t('hero.line4.middle2')}}-->
-<!--            <span class="text-secondary">{{$t('hero.line4.end')}}</span>-->
-<!--          </h2>-->
-<!--        </li>-->
-<!--      </ul>-->
-      <div class="grid grid-cols-1 gap-2 max-w-md mt-6" >
-        <div >
-<!--          <a href="#forinfluencers" class="text-center hover:bg-black transform hover:scale-105 duration-500 w-full block bg-secondary text-white shadow rounded-md font-bold md:text-lg py-2">Test the proof of concept</a>-->
+      <div class="mt-4" v-if="!isActivated">
+        <div class=" font-extrabold leading-tight text-4xl mt-16 lg:text-5xl  md:h-48">
+          <b>Let the crpyto 🌎 know you are the <span class="text-secondary underline">Right Person</span></b>
         </div>
-        <div >
-<!--          <a href="#forbuilders" class="text-center hover:bg-black transform hover:scale-105 duration-500 w-full block bg-secondary text-white shadow rounded-md font-bold md:text-lg py-2">For BUIDLers</a>-->
-        </div>
-
-<!--        <div class="text-center">-->
-<!--          <a  href="/#savings-calculator" class="hover:bg-black transform hover:scale-105 duration-500 w-full	block bg-secondary text-white shadow rounded-md md:text-lg py-2" >{{$t('hero.button2')}}</a>-->
-<!--        </div>-->
+        <h2 class="text-md mt-5 md:mt-0 md:text-xl">Link your BSC wallet to your social media profiles</h2>
       </div>
-    </div>
-      <div class="mt-4" v-if="step===1">
-        <div class="hidden lg:block font-extrabold leading-tight text-4xl mt-16 lg:text-5xl  md:h-48">
-          <b>Step 1 : <span class="text-secondary underline">blabla </span></b>
-
+      <div v-if="isActivated">
+        <div class="mt-4" v-if="state==='beforeVerification'">
+          <div class="hidden lg:block font-extrabold leading-tight text-4xl mt-16   md:h-48">
+            <b>Step 1 :<br /> transfer some <span class="text-secondary ">$LINK </span></b>
+            <h2 class="text-md font-normal mt-5 md:mt-0 md:text-xl">So we can request data for you.</h2>
+            <p class="text-sm font-normal">Use the transfer button to transfer at least <span class="text-secondary "> 0.2 $LINK </span>( 0.1 to initiate the verification and 0.1 for each verification attempt)</p>
+            <b>Step 2 :<br /> enter the URL you want to verify</b>
+            <h2 class="text-md font-normal mt-5 md:mt-0 md:text-xl">And request verification</h2>
+          </div>
         </div>
       </div>
-      <div class="mt-4" v-if="step===2">
-        <div class="hidden lg:block font-extrabold leading-tight text-4xl mt-16 lg:text-5xl  md:h-48">
-          <b>Step 2 : <span class="text-secondary underline">blabla </span></b>
 
-        </div>
-      </div>
-      <div class="mt-4" v-if="step===3">
-        <div class="hidden lg:block font-extrabold leading-tight text-4xl mt-16 lg:text-5xl  md:h-48">
-          <b>Step 3 : <span class="text-secondary underline">blabla </span></b>
-
-        </div>
-      </div>
       <div class="md:mt-20 relative cursor-pointer outline-none">
-<!--              <img src="~/assets/images/gifs/hero.gif" class="w-full  flex-wrap object-cover  bg-center rounded-xl shadow-xl" alt="The best guy" />-->
+        <div class="px-4 pt-4 max-w-md bg-white rounded-lg border shadow-md  dark:bg-gray-800 dark:border-gray-700">
+          <div class="flex  items-center mb-2 pb-2 border-b-4 border-gray-200">
+            <img src="/images/logos/wallet.svg"  class="fill-cyan-500 pt-2 text-secondary block object-contain h-16" />
 
-      <div class="px-4 pt-4 max-w-md bg-white rounded-lg border shadow-md  dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex  items-center mb-2 pb-2 border-b-4 border-gray-200">
-          <img src="/images/logos/wallet.svg"  class="fill-cyan-500 pt-2 text-secondary block object-contain h-16" />
-          <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">Wallet not connected<br />
-          <span class="text-xs text-gray-500 font-light">Connect with metamask</span></h5>
-        </div>
-        <div class="flow-root">
-          <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li class="py-5" data-aos="zoom-in" >
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-12 h-8 " src="/images/tiktok.svg" alt="Neil image">
+            <div v-if="!isActivated" >
+              <a @click="open">
+                <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">Wallet not connected<br />
+                  <span  class="text-xs text-gray-500 font-light">Connect with metamask</span></h5>
+              </a>
+            </div>
+            <div v-else class="flex items-center">
+              <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">{{  shortenAddress(address) }}<br />
+                <span class="text-xs text-gray-500 font-light">{{ displayEther(balance) }} TBNB</span></h5>
+              <div class="flex-col ml-5">
+                <div>
+                  <label for="transfer" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
+                  <div class="relative">
+                    <input type="number" step=".1" id="transfer" v-model="linkAmount" class="block p-4  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0.2" required>
+                    <button @click="transfer()" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send $LINK</button>
+                  </div>
                 </div>
-                <div class="flex-1 min-w-0">
-
-                  <form>
-                    <input type="text" id="tiktok" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://tiktok.com/@username" required>
-
-                  </form>
-                </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  <img src="/images/unverified.svg"  class="block object-contain h-12 " />
-                </div>
-              </div>
-            </li>
-
-            <li class="py-5" data-aos="zoom-in" >
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-12 h-12" src="/images/instagram.svg" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
-
-                  <form>
-                    <input type="text" id="instagram" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://instagram.com/username" required>
-
-                  </form>
-                </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  <img src="/images/unverified.svg"  class="block object-contain h-12 " />
+                <div>
+                  <span class="text-xs text-gray-500 font-light" >$LINK Credits : <span v-if="linkBalance">{{linkBalance}}</span><span v-else>Unknown</span></span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="py-5" data-aos="zoom-in" >
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img class="w-12 h-12" src="/images/twitch.svg" alt="Neil image">
-                </div>
-                <div class="flex-1 min-w-0">
+          <Notifications :state="state" :challenge="challenge" :error="error"/>
 
-                  <form>
-                    <input type="text" id="twitch" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitch.com/username/about" required>
+          <div class="flow-root">
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
 
-                  </form>
+              <li class="py-5" data-aos="zoom-in" >
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <form>
+                      <input :disabled="!isActivated" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+                      <span v-if="twitter.url.length > 0">
+            <label class="text-xs text-secondary" for="twitter_element">Current valid twitter Bio HTML selector :</label>
+            <input disabled="disabled" :value="twitter.element" type="text" id="twitter_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+          </span>
+                    </form>
+                  </div>
+                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    <img v-if="twitter.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
+                    <img v-else-if="state === 'init'" src="/images/go.svg" v-on:click="requestVerification(twitter.url, twitter.element)" class="block object-contain h-12 " />
+                    <img  src="/images/go.svg" v-on:click="verify()" class="block object-contain h-12 " />
+<!--                    <img v-else-if="state === 'afterChallengeRecieved'" src="/images/go.svg" v-on:click="verify()" class="block object-contain h-12 " />-->
+
+                  </div>
                 </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  <img src="/images/unverified.svg"  class="block object-contain h-12 " />
+              </li>
+
+              <li class="py-5" data-aos="zoom-in" >
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img class="w-12 h-8 " src="/images/tiktok.svg" alt="Neil image">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <form>
+                      <input :disabled="!isActivated" type="text" id="tiktok" v-model="tiktok.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://tiktok.com/@username" required>
+                      <span v-if="tiktok.url.length > 0">
+            <label class="text-xs text-secondary" for="twitter_element">Current valid Tiktok Bio HTML selector :</label>
+            <input disabled="disabled" :value="tiktok.element" type="text" id="tiktok_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+          </span>
+                    </form>
+                  </div>
+                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    <img v-if="tiktok.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
+                    <img v-else src="/images/go.svg"  v-on:click="requestVerification(tiktok.url, tiktok.element)" class="block object-contain h-12 " />
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+              <li class="py-5" data-aos="zoom-in" >
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img class="w-12 h-12" src="/images/twitch.svg" alt="Neil image">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <form>
+                      <input :disabled="!isActivated" type="url" id="twitch" v-model="twitch.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitch.com/username/about" required>
+                      <span v-if="twitch.url.length > 0">
+            <label class="text-xs text-secondary" for="twitter_element">Current valid Twitch 'About' HTML selector :</label>
+            <input disabled="disabled" :value="twitch.element" type="text" id="twitch_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+            </span>
+                    </form>
+                  </div>
+                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    <img v-if="twitch.url.length == 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
+                    <img v-else-if="state === 'init'" src="/images/go.svg" v-on:click="requestVerification(twitch.url, twitch.element)" class="block object-contain h-12 " />
+                    <img  src="/images/go.svg" v-on:click="verify()" class="block object-contain h-12 " />
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-5" data-aos="zoom-in" >
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <div class="flex-1 min-w-0 relative">
+                      <img src="/images/logo.svg"  class="block  h-10 w-8 ml-10" />
+                      <div class="absolute left-0   bottom-0"><div class=" bg-black ml-0  mt-1 md:mt-0 text-xs rounded-xl text-white px-2 font-bold">Verified</div></div>
+                    </div>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class=" text-gray-500 text-sm ">Will allow to verify most websites without a login wall. More will be added soon when our DAO is live !</div>
+                  </div>
+                  <div class="inline-flex">
+                    <div class="w-6"></div>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
         </div>
       </div>
-
-      <!--      <div class="flex-row absolute z-10" data-aos="zoom-in" data-aos-delay="1200">-->
-<!--        <img src="~/assets/images/faces/xavier.png" class="w-64 flex-wrap object-cover  bg-center rounded-xl shadow-xl" alt="The best guy" />-->
-<!--        <div class="flex-grow text-secondary text-md font-bold">Xavier, Mister prospection</div>-->
-<!--      </div>-->
-<!--      <div class="flex-row absolute top-0 right-0" data-aos="zoom-in" data-aos-delay="1400">-->
-<!--        <div  class="flex-grow text-md font-bold text-right">Yann, Growth Developer</div>-->
-<!--        <img src="~/assets/images/faces/yann.png" class="w-64 object-cover flex-wrap bottom-0 right-0 bg-center rounded-xl shadow-xl" alt="The best guy" />-->
-<!--      </div>-->
-    </div>
     </div>
     <div class="text-xl text-center">
       <b class="text-2xl">Handcrafted using :</b>
@@ -197,26 +193,139 @@
     </div>
   </section>
 </template>
+
 <script>
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import { useBoard, useEthers, displayEther, shortenAddress } from 'vue-dapp'
+import AOS from "aos"
+import { ethers } from "ethers";
+import VerifiedAbi from "../../abis/verified.json";
+import LinkAbi from "../../abis/link.json";
+import Notifications from "../../components/Notifications"
 
 export default {
-  beforeCreate () {
-    this.$store.dispatch('web3/registerWeb3')
+  setup() {
+    const { open } = useBoard()
+    const { address, balance, chainId, isActivated, signer } = useEthers()
+    const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
+    const linkInterface = new ethers.utils.Interface(LinkAbi)
+
+    const linkTokenContract = "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
+    const verifiedContract = "0xd2C9b8602A4F39B7f7aC707653ddfB3F213Bd9B0"
+    let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
+    const linksigner = provider.getSigner()
+
+    const link_contract = new ethers.Contract(
+        linkTokenContract,
+        linkInterface,
+        linksigner
+    );
+
+    const verified_contract = new ethers.Contract(
+        verifiedContract,
+        verifiedInterface,
+        linksigner
+    );
+
+    return {
+      address,
+      balance,
+      chainId,
+      isActivated,
+      open,
+      displayEther,
+      shortenAddress,
+      link_contract,
+      verifiedContract,
+      verified_contract,
+      signer
+    };
+  },
+  components: {
+    Notifications
   },
   mounted() {
+    const { address } = useEthers()
+    let _self = this;
     AOS.init({ })
+
+    this.verified_contract.on("PaymentSet", (addr, balance) => {
+      if (address.value === addr) {
+        _self.linkBalance = balance / 1000000000000000000
+      }
+    });
+
+    this.verified_contract.on("ValidationUpdate", (addr, state, challenge) => {
+      if (address.value === addr && challenge.toString() !== "0") {
+        console.log(challenge);
+        this.challenge = challenge.toString()
+        _self.state = 'afterChallengeRecieved'
+      }
+    });
+
+    this.verified_contract.on("VerificationResult", (addr, verified, timestamp, url, selector) => {
+      console.log(verified)
+      if (address.value === addr) {
+        _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
+      }
+    });
+
+    this.verified_contract.on("Verification", (addr, timestamp, url, selector) => {
+      console.log(addr, timestamp, url, selector)
+    });
   },
   data() {
     return {
-      step: 0
+      state: "init",
+      linkBalance: null,
+      challenge: "",
+      linkAmount: .2,
+      error: "unknown error, please try again",
+      twitter: {url: "", element: "div#react-root div > div > div > div:nth-child(3) > div > div > span"},
+      tiktok: {url: "", element: "h2[data-e2e='user-bio']"},
+      twitch: {url: "", element: "div[data-a-target='about-panel']"}
     };
-    },
+  },
   methods: {
-    nextStep () {
-      this.step += 1;
+    requestVerification(url, path) {
+      let _self = this;
+      try {
+        const { signer } = useEthers()
+        this.verified_contract.connect(signer.value).requestVerification(url, path).then(function(){
+          _self.state = 'afterVerificationRequest'
+        }, function(error) {
+          _self.error = error.data.message
+          _self.state = 'error'
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    verify() {
+      let _self = this;
+      try {
+        const { signer } = useEthers()
+        this.verified_contract.connect(signer.value).verify().then(function(){
+          _self.state = 'afterManualVerification'
+        }, function(error) {
+          _self.error = error.data.message
+          _self.state = 'error'
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    transfer() {
+      try {
+        const { signer } = useEthers()
+        const validationData =  ethers.utils.defaultAbiCoder.encode(['uint256'], [0]);
+        this.link_contract.connect(signer.value).transferAndCall(this.verifiedContract, ethers.utils.parseUnits(this.linkAmount.toString(), 18), validationData).then(function(){
+          // _self.step += 1;
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
 }
+
 </script>
