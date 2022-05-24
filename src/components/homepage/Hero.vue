@@ -89,11 +89,10 @@
             </div>
           </div>
 
-          <Notifications :state="state" :challenge="challenge" :error="error"/>
+          <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>
 
           <div class="flow-root">
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-
               <li class="py-5" data-aos="zoom-in" >
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
@@ -101,7 +100,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <input :disabled="!isActivated" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+                      <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
                       <span v-if="twitter.url.length > 0">
             <label class="text-xs text-secondary" for="twitter_element">Current valid twitter Bio HTML selector :</label>
             <input disabled="disabled" :value="twitter.element" type="text" id="twitter_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
@@ -110,11 +109,16 @@
                   </div>
                   <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                     <img v-if="twitter.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
-                    <img v-else-if="state === 'init'" src="/images/go.svg" v-on:click="requestVerification(twitter.url, twitter.element)" class="block object-contain h-12 " />
-                    <img  src="/images/go.svg" v-on:click="verify()" class="block object-contain h-12 " />
-<!--                    <img v-else-if="state === 'afterChallengeRecieved'" src="/images/go.svg" v-on:click="verify()" class="block object-contain h-12 " />-->
-
                   </div>
+                </div>
+                <div v-if="twitter.url.length > 0" class="mt-5">
+                  <button v-if="state === 'init'" v-on:click="requestVerification(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
+                  </button>
+
+                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
+                  </button>
                 </div>
               </li>
 
@@ -125,7 +129,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <input :disabled="!isActivated" type="text" id="tiktok" v-model="tiktok.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://tiktok.com/@username" required>
+                      <input :disabled="!isActivated  || twitter.url.length > 0 || twitch.url.length > 0" type="text" id="tiktok" v-model="tiktok.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://tiktok.com/@username" required>
                       <span v-if="tiktok.url.length > 0">
             <label class="text-xs text-secondary" for="twitter_element">Current valid Tiktok Bio HTML selector :</label>
             <input disabled="disabled" :value="tiktok.element" type="text" id="tiktok_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
@@ -134,8 +138,16 @@
                   </div>
                   <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                     <img v-if="tiktok.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
-                    <img v-else src="/images/go.svg"  v-on:click="requestVerification(tiktok.url, tiktok.element)" class="block object-contain h-12 " />
                   </div>
+                </div>
+                <div v-if="tiktok.url.length > 0" class="mt-5">
+                  <button v-if="state === 'init'" v-on:click="requestVerification(tiktok.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
+                  </button>
+
+                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
+                  </button>
                 </div>
               </li>
               <li class="py-5" data-aos="zoom-in" >
@@ -145,7 +157,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <input :disabled="!isActivated" type="url" id="twitch" v-model="twitch.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitch.com/username/about" required>
+                      <input :disabled="!isActivated || twitter.url.length > 0 || tiktok.url.length > 0" type="url" id="twitch" v-model="twitch.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitch.com/username/about" required>
                       <span v-if="twitch.url.length > 0">
             <label class="text-xs text-secondary" for="twitter_element">Current valid Twitch 'About' HTML selector :</label>
             <input disabled="disabled" :value="twitch.element" type="text" id="twitch_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
@@ -153,10 +165,18 @@
                     </form>
                   </div>
                   <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    <img v-if="twitch.url.length == 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
-                    <img v-else-if="state === 'init'" src="/images/go.svg" v-on:click="requestVerification(twitch.url, twitch.element)" class="block object-contain h-12 " />
-                    <img  src="/images/go.svg" v-on:click="verify()" class="block object-contain h-12 " />
-                  </div>
+                    <img v-if="twitch.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
+                    </div>
+                </div>
+                <div v-if="twitch.url.length > 0" class="mt-5">
+
+                  <button v-if="state === 'init'" v-on:click="requestVerification(twitch.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
+                  </button>
+
+                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
+                  </button>
                 </div>
               </li>
 
@@ -183,14 +203,6 @@
         </div>
       </div>
     </div>
-    <div class="text-xl text-center">
-      <b class="text-2xl">Handcrafted using :</b>
-      <div class="max-w-2xl mx-auto grid grid-rows-3 gap-5 md:mb-0 md:flex items-center justify-center pb-12">
-        <a target="_blank" href="https://www.bnbchain.world/en/smartChain"><img src="/images/partners/bsc.svg" class="w-32" alt="The best guy" /></a>
-        <a target="_blank" href="https://www.chain.link"><img src="/images/partners/chainlink.svg" class="block w-32  flex-wrap " alt="The best guy" /></a>
-        <a target="_blank" href="https://bscscan.com/"><img src="/images/partners/bscscan.svg" class="block w-32  flex-wrap " alt="The best guy" /></a>
-      </div>
-    </div>
   </section>
 </template>
 
@@ -210,7 +222,7 @@ export default {
     const linkInterface = new ethers.utils.Interface(LinkAbi)
 
     const linkTokenContract = "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
-    const verifiedContract = "0xd2C9b8602A4F39B7f7aC707653ddfB3F213Bd9B0"
+    const verifiedContract = "0x709CD71CF35855E26B4A3326B89fe6d52f197e79"
     let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
     const linksigner = provider.getSigner()
 
@@ -254,28 +266,29 @@ export default {
       }
     });
 
-    this.verified_contract.on("ValidationUpdate", (addr, state, challenge) => {
+    this.verified_contract.on("ValidationUpdate", (addr, challenge) => {
+      console.log('ALLO');
+      console.log(challenge);
       if (address.value === addr && challenge.toString() !== "0") {
         console.log(challenge);
         this.challenge = challenge.toString()
         _self.state = 'afterChallengeRecieved'
+        _self.errorState = false
       }
     });
 
-    this.verified_contract.on("VerificationResult", (addr, verified, timestamp, url, selector) => {
+    this.verified_contract.on("VerificationResult", (addr, verified, url, selector) => {
       console.log(verified)
       if (address.value === addr) {
         _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
+        _self.errorState = false
       }
-    });
-
-    this.verified_contract.on("Verification", (addr, timestamp, url, selector) => {
-      console.log(addr, timestamp, url, selector)
     });
   },
   data() {
     return {
       state: "init",
+      errorState: false,
       linkBalance: null,
       challenge: "",
       linkAmount: .2,
@@ -294,7 +307,7 @@ export default {
           _self.state = 'afterVerificationRequest'
         }, function(error) {
           _self.error = error.data.message
-          _self.state = 'error'
+          _self.errorState = true
         })
       } catch (error) {
         console.log(error)
@@ -308,7 +321,7 @@ export default {
           _self.state = 'afterManualVerification'
         }, function(error) {
           _self.error = error.data.message
-          _self.state = 'error'
+          _self.errorState = true
         })
       } catch (error) {
         console.log(error)

@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div v-if="state === 'error'" class=" max-w-md bg-white rounded-lg  shadow-md  dark:bg-gray-800 dark:border-gray-700">
+  <div v-if="errorState === true" class=" max-w-md bg-white rounded-lg  shadow-md  dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4 mb-2 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert">
       <span class="font-medium">{{ error }}</span>
     </div>
@@ -55,7 +55,7 @@
 </template>
 <script>
 export default {
-  props: ['state', 'challenge', 'error']
+  props: ['state', 'challenge', 'error', 'errorState']
 }
 </script>
 
