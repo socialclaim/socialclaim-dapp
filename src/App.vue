@@ -16,4 +16,5 @@
   url(./fonts/Poppins-Medium.ttf) format("truetype");
   font-weight: bold;
 }
+
 </style>

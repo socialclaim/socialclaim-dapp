@@ -1,14 +1,11 @@
   <style>
-
   .wave-bottom-black {
     position: relative;
   }
-
   .wave-bottom-black::before,
   .wave-bottom-black::after {
 
   }
-
   .wave-bottom-black::before {
     content: "";
     position: absolute;
@@ -30,14 +27,14 @@
     background-size: 40px 40px;
     background-image: radial-gradient(circle at 10px 26px, #fff 20px, transparent 21px);
   }
-
   </style>
 
   <template>
-    <section class="wave-bottom-black bg-secondary " id="directory">
-      <div class="max-w-md mx-auto">
+    <section class="wave-bottom-black bg-secondary" id="directory">
+      <div class="max-w-screen-md mx-auto">
         <div class="max-w-screen-lg mx-auto pt-10">
-          <h2 class="text-3xl text-white mb-6  text-center">Verifications for an address</h2>
+
+          <h2 class="text-3xl text-white mb-6  text-center">Verifications history per address</h2>
         </div>
         <div v-if="!isActivated" class="text-center">
           <button @click="open" type="button" class="mb-20 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
@@ -56,7 +53,7 @@
             </div>
             <button @click="getVerificationsForAddress()" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
           </div>
-          <div class="mt-6 max-w-3xl mx-auto  pb-20 ">
+          <div class="mt-6 mx-auto  pb-20 ">
             <div class=" shadow-md ">
               <table class="w-full rounded-lg text-sm text-left text-gray-400">
                 <thead class="text-xs  uppercase bg-gray-50  text-gray-400">
@@ -73,15 +70,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="searchResult in searchResults" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th scope="row" class=" px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                    <a :href="searchResult.url" class="underline text-secondary">{{ searchResult.url }}</a>
-                  </th>
-                  <td class="px-6 py-4 overflow-x-auto h-12">
-                    {{ searchResult.selector }}
+                <tr v-for="searchResult in searchResults" class="h-12 bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <td  class=" px-6  font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                    <a :href="searchResult.url" target="_blank" class="underline text-secondary">{{ searchResult.url }}</a>
                   </td>
-                  <td class="px-6 py-4 overflow-x-auto">
+                  <td class=" py-4 text-xs">
+                    <div class="bg-gray-200 rounded-lg p-2">
+                      {{ searchResult.selector }}
+                    </div>
+                  </td>
+                  <td class="px-6 text-xs">
+                    <div class="bg-gray-200 rounded-lg p-2">
                     {{ searchResult.timestamp }}
+                    </div>
                   </td>
                 </tr>
                 </tbody>
@@ -103,7 +104,7 @@
       const { open } = useBoard()
       const { isActivated } = useEthers()
       const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
-      const verifiedContractAddr = "0x709CD71CF35855E26B4A3326B89fe6d52f197e79"
+      const verifiedContractAddr = "0x907db91eDD3B5ABd8b52CF1088a3876A581A8D49"
       let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
       const linksigner = provider.getSigner()
       const verifiedContract = new ethers.Contract(
@@ -121,11 +122,11 @@
     data() {
       return {
         searchAddress: null,
-        searchResults: []
+        searchResults: [{timestamp: new Date(), url: "https://asdf.com/asdfasdfasdfasdfasdfasdf", selector: "div#react-root div > div > div > div:nth-child(3) > div > div > span"}]
       }
     },
     mounted() {
-      this.verifiedContract.on("Verification", (addr, timestamp, url, selector) => {
+      this.verifiedContract.on("VerificationForAddress", (addr, timestamp, url, selector) => {
         this.searchResults.push({timestamp: new Date(timestamp * 1000), url: url, selector: selector})
       });
     },
@@ -133,6 +134,7 @@
       getVerificationsForAddress() {
         try {
           const { signer } = useEthers()
+          this.searchResults = []
           this.verifiedContract.connect(signer.value).getVerificationsForAddress(this.searchAddress).then(function(){
           }, function(error) {
             console.log(error)
