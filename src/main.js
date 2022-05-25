@@ -12,5 +12,5 @@ const head = createHead()
 import './index.css'
 import store from './store'
 
-createApp(App).use(VueDapp).use(store).use(router).use(head).use(Vue3Mq).use(VueCollapsiblePanel).use(VueGtag, {property: {id: "G-Q5S6T2RX7H"}}).mount('#app');
+createApp(App).use(VueDapp,  { appUrl: "https://verified.nescrypto.com" }).use(store).use(router).use(head).use(Vue3Mq).use(VueCollapsiblePanel).use(VueGtag, {property: {id: "G-Q5S6T2RX7H"}}).mount('#app');
 
