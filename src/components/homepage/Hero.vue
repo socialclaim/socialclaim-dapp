@@ -1,7 +1,98 @@
+<style>
 
+.vcpg[data-v-63943e43] {
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+}
 
+.vcpg[data-v-63943e43] .vcp * {
+  box-sizing: border-box
+}
+
+.vcpg[data-v-63943e43] .vcp__header {
+  background-color: #FFF;
+  height: 46px;
+  border-radius: 12px 12px 0 0;
+  transition: background-color .3s ease
+}
+
+.vcpg[data-v-63943e43] .vcp__header:hover {
+  background-color: #FFF
+}
+
+.vcpg[data-v-63943e43] .vcp__header:active {
+  background-color: var(--bg-color-header-active)
+}
+
+.vcpg[data-v-63943e43] .vcp:not(:first-of-type) .vcp__header {
+
+}
+
+.vcpg[data-v-63943e43] .vcp__header-title {
+  font-weight: 500
+}
+
+.vcpg[data-v-63943e43] .vcp__body {
+  background-color: var(--bg-color-body)
+}
+
+.vcp__header[data-v-64321428] {
+  display: flex;
+  padding: 12px;
+  pointer-events: none
+}
+
+.vcp--expandable .vcp__header[data-v-64321428] {
+  pointer-events: auto;
+  cursor: pointer
+}
+
+.vcp__header-title[data-v-64321428] {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  font-weight: bold;
+  color: #ABABAB
+}
+
+.vcp__header-icon[data-v-64321428] {
+  display: flex;
+  align-items: center;
+  transition: transform .3s cubic-bezier(.5, .25, 0, 1);
+  color: #ABABAB
+}
+
+.vcp--expanded .vcp__header-icon[data-v-64321428] {
+  transform-origin: center;
+  transform: rotate(180deg)
+}
+
+.vcp__header-icon > span[data-v-64321428] {
+  display: flex;
+  height: 24px;
+  width: 24px
+}
+
+.vcp__header-icon[data-v-64321428] svg {
+  height: 100%;
+  width: 100%
+}
+
+.vcp__body[data-v-64321428] {
+  overflow: hidden;
+  transition: all .3s cubic-bezier(.5, .25, 0, 1)
+}
+
+.vcp__body-content[data-v-64321428] {
+  padding: 12px
+}
+
+.slide-enter-from[data-v-64321428], .slide-leave-to[data-v-64321428] {
+  opacity: .25
+}
+</style>
 <template>
-  <section >
+  <section id="verify" >
     <div class="grid grid-cols-1 md:grid-cols-2 px-4  pb-20 gap-6 mx-auto max-w-screen-lg">
       <div class="mt-12" v-if="!isActivated">
         <div class="font-bold leading-relaxed mt-16 lg:text-5xl ">
@@ -9,37 +100,51 @@
         </div>
         <h2 class="text-md  md:mt-5 md:text-xl">Link your BSC wallet to your social media profiles</h2>
       </div>
-      <div v-if="isActivated">
-        <div class="mt-4" v-if="state==='init'">
-          <div class="  leading-tight  md:mt-28 ">
-              <b> <span class="text-2xl ">Setup :</span></b>
-              <ul class="list-disc pl-10 text-xl">
-                <li class="mt-6">Install MetaMask and add the Binance Smart Chain test network</li>
-                <li class="mt-6">
+      <div v-if="isActivated" class="md:mt-20">
+        <vue-collapsible-panel-group class="rounded-lg border shadow-md dark:bg-gray-800 dark:border-gray-700" accordion>
+          <vue-collapsible-panel>
+            <template #title >
+             Setup
+            </template>
+            <template #content>
+              <ul class="list-disc pl-6 text-lg">
+                <li class="mt-3">Install MetaMask and add the Binance Smart Chain test network</li>
+                <li class="mt-3">
                   Request Test <span class="text-yellow-600">$BNB</span> <a target="_blank" class="underline text-yellow-600" href="https://testnet.binance.org/faucet-smart">Here</a>
                   and <span class="text-secondary ">$LINK</span> <a target="_blank" class="underline text-secondary" href="https://faucets.chain.link/chapel">Here</a>
                 </li>
-                <li  class="mt-6">Make sure your  <span class="text-secondary ">$LINK </span> is displayed in MetaMask</li>
+                <li  class="mt-3">Make sure your  <span class="text-secondary ">$LINK </span> is displayed in MetaMask</li>
               </ul>
-            </div>
-            <div class="mt-12">
-              <b> <span class="text-2xl">Step 1 : Transfer</span></b>
+            </template>
+          </vue-collapsible-panel>
+          <vue-collapsible-panel :expanded="false">
+            <template #title>
+              Step 1 : Transfer
+            </template>
+            <template #content>
               <ul class="list-disc pl-10 text-xl">
                 <li class="mt-6">Use the transfer button to send us some <span class="text-secondary ">$LINK </span> so we can request data for you. </li>
                 <li  class="mt-6">Cost is : <span class="text-secondary ">0.1 $LINK</span> to initiate the verification and <span class="text-secondary ">0.1 $LINK</span> per verification attempt</li>
                 <li  class="mt-6">Make sure your  <span class="text-secondary ">$LINK </span> is displayed in MetaMask</li>
               </ul>
-            </div>
-          </div>
-        <div class="mt-12"  v-else>
-          <b> <span class="text-2xl">Step 2 : Start the verification process</span></b>
-          <ul class="list-disc pl-10 text-xl">
-            <li class="mt-6">Enter the URL you want to verify</li>
-            <li  class="mt-6">Click <span class="text-secondary ">Start Verification</span> and wait for the challenge to be displayed</li>
-            <li  class="mt-6">Copy the challenge in the Bio of the social media you selected</li>
-            <li  class="mt-6">Click <span class="text-secondary ">Verify</span></li>
-          </ul>
-        </div>
+            </template>
+          </vue-collapsible-panel>
+          <vue-collapsible-panel :expanded="false">
+            <template #title >
+              Step 2 : Start the verification process
+            </template>
+            <template #content>
+              <ul class="list-disc pl-10 text-xl">
+                <li class="mt-6">Enter the URL you want to verify</li>
+                <li  class="mt-6">Click <span class="text-secondary ">Start Verification</span> and wait for the challenge to be displayed</li>
+                <li  class="mt-6">Copy the challenge in the Bio of the social media you selected</li>
+                <li  class="mt-6">Click <span class="text-secondary ">Verify</span></li>
+              </ul>
+            </template>
+          </vue-collapsible-panel>
+        </vue-collapsible-panel-group>
+        <div class="mt-4" v-if="state==='init'"></div>
+        <div class="mt-28"  v-else></div>
       </div>
         <div class="md:mt-20 relative cursor-pointer outline-none">
           <div class="px-4 pt-4 max-w-md bg-white rounded-lg border shadow-md  dark:bg-gray-800 dark:border-gray-700">
@@ -121,7 +226,7 @@
                     </div>
                   </div>
                   <div v-if="tiktok.url.length > 0" class="mt-5">
-                    <button v-if="state === 'init'" v-on:click="requestVerification(tiktok.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <button v-if="state === 'init'" v-on:click="requestVerification(tiktok.url, tiktok.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                       <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
                     </button>
 
@@ -189,9 +294,9 @@
 <script>
 import { useBoard, useEthers, displayEther, shortenAddress } from 'vue-dapp'
 import AOS from "aos"
-import { ethers } from "ethers";
-import VerifiedAbi from "../../abis/verified.json";
-import LinkAbi from "../../abis/link.json";
+import { ethers } from "ethers"
+import VerifiedAbi from "../../abis/verified.json"
+import LinkAbi from "../../abis/link.json"
 import Notifications from "../../components/Notifications"
 
 export default {
@@ -200,20 +305,19 @@ export default {
     const { address, balance, chainId, isActivated, signer } = useEthers()
     const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
     const linkInterface = new ethers.utils.Interface(LinkAbi)
-
-    const linkTokenContract = "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
-    const verifiedContract = "0x907db91eDD3B5ABd8b52CF1088a3876A581A8D49"
+    const linkTokenContractAddress = "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
+    const verifiedContractAddress = "0x907db91eDD3B5ABd8b52CF1088a3876A581A8D49"
     let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
     const linksigner = provider.getSigner()
 
-    const link_contract = new ethers.Contract(
-        linkTokenContract,
+    const linkContract = new ethers.Contract(
+        linkTokenContractAddress,
         linkInterface,
         linksigner
     );
 
-    const verified_contract = new ethers.Contract(
-        verifiedContract,
+    const verifiedContract = new ethers.Contract(
+        verifiedContractAddress,
         verifiedInterface,
         linksigner
     );
@@ -226,9 +330,9 @@ export default {
       open,
       displayEther,
       shortenAddress,
-      link_contract,
+      linkContract,
+      verifiedContractAddress,
       verifiedContract,
-      verified_contract,
       signer
     };
   },
@@ -237,16 +341,16 @@ export default {
   },
   mounted() {
     const { address } = useEthers()
-    let _self = this;
+    let _self = this
     AOS.init({ })
 
-    this.verified_contract.on("PaymentSet", (addr, balance) => {
+    this.verifiedContract.on("PaymentSet", (addr, balance) => {
       if (address.value === addr) {
         _self.linkBalance = balance / 1000000000000000000
       }
     });
 
-    this.verified_contract.on("ValidationUpdate", (addr, challenge) => {
+    this.verifiedContract.on("ValidationUpdate", (addr, challenge) => {
       if (address.value === addr && challenge.toString() !== "0") {
         this.challenge = challenge.toString()
         _self.state = 'afterChallengeRecieved'
@@ -254,7 +358,7 @@ export default {
       }
     });
 
-    this.verified_contract.on("VerificationResult", (addr, verified, url, selector) => {
+    this.verifiedContract.on("VerificationResult", (addr, verified) => {
       console.log(verified)
       if (address.value === addr) {
         _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
@@ -277,10 +381,10 @@ export default {
   },
   methods: {
     requestVerification(url, path) {
-      let _self = this;
+      let _self = this
       try {
         const { signer } = useEthers()
-        this.verified_contract.connect(signer.value).requestVerification(url, path).then(function(){
+        this.verifiedContract.connect(signer.value).requestVerification(url, path).then(function(){
           _self.state = 'afterVerificationRequest'
         }, function(error) {
           _self.error = error.data.message
@@ -291,10 +395,10 @@ export default {
       }
     },
     verify() {
-      let _self = this;
+      let _self = this
       try {
         const { signer } = useEthers()
-        this.verified_contract.connect(signer.value).verify().then(function(){
+        this.verifiedContract.connect(signer.value).verify().then(function(){
           _self.state = 'afterManualVerification'
         }, function(error) {
           _self.error = error.data.message
@@ -307,8 +411,8 @@ export default {
     transfer() {
       try {
         const { signer } = useEthers()
-        const validationData =  ethers.utils.defaultAbiCoder.encode(['uint256'], [0]);
-        this.link_contract.connect(signer.value).transferAndCall(this.verifiedContract, ethers.utils.parseUnits(this.linkAmount.toString(), 18), validationData).then(function(){
+        const validationData =  ethers.utils.defaultAbiCoder.encode(['uint256'], [0])
+        this.linkContract.connect(signer.value).transferAndCall(this.verifiedContractAddress, ethers.utils.parseUnits(this.linkAmount.toString(), 18), validationData).then(function(){
         })
       } catch (error) {
         console.log(error)

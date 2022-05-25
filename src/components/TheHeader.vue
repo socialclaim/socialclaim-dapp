@@ -40,6 +40,8 @@
         <Logo />
       </a>
       <ul class="relative space-x-2 flex rtl:space-x-reverse h-full">
+        <li class="hidden lg:block relative"><a class=" block pt-2 pr-5 text-white   hover:text-gray-900" href="#verify">Verify an address</a></li>
+        <li class="hidden lg:block relative"><a class=" block pt-2 pr-5 text-white   hover:text-gray-900" href="#report">Get a report</a></li>
         <li class="hidden lg:block ">
           <a href="https://discord.gg/6qk9rPvZ" target="_blank"><img src="/images/logos/discord.svg"  class="block object-contain h-10" /></a>
         </li>
