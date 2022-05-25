@@ -74,7 +74,7 @@
 import { useBoard, useEthers, displayEther, shortenAddress } from 'vue-dapp'
 const { open } = useBoard()
 const { address, balance, isActivated } = useEthers()
-</script>
+</script>`
 <script>
 import Logo from "../components/Logo"
 

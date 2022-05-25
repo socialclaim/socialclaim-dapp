@@ -116,7 +116,7 @@
       const { open } = useBoard()
       const { isActivated, address } = useEthers()
       const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
-      const verifiedContractAddr = "0x179D72a30f59870bE34EfD8a449BCCE2E43397Ea"
+      const verifiedContractAddr = "0x894389Ab1c579E6a98fe4B99FC6c4EfaeADD0A62"
       let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
       const linksigner = provider.getSigner()
       const verifiedContract = new ethers.Contract(

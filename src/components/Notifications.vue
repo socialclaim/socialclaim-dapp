@@ -1,7 +1,7 @@
 <template>
 
   <div v-if="challenge">
-    <span class="font-medium">Challenge :</span> <br />
+    <span class="font-medium">Challenge :</span> <a class=" underline text-secondary text-xs" @click="doCopy()">COPY</a><br />
     <input disabled="disabled" :value="challenge" type="text" id="twitter"  class="w-full p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
   </div>
 
@@ -37,7 +37,7 @@
 
   <div v-if="state === 'verificationSuccessful'" class=" max-w-md bg-white rounded-lg  shadow-md  dark:bg-gray-800 dark:border-gray-700">
     <div class="p-4 mb-2 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert">
-      <span class="font-medium">Verification successful ! Please use the explorer below to see your verifications</span>
+      <span class="font-medium">Verification successful ! Please use the "report per address" tool to check your verifications</span>
     </div>
   </div>
 
@@ -54,8 +54,15 @@
   </div>
 </template>
 <script>
+import { copyText } from 'vue3-clipboard'
+
 export default {
-  props: ['state', 'challenge', 'error', 'errorState']
+  props: ['state', 'challenge', 'error', 'errorState'],
+  methods: {
+    doCopy() {
+      copyText(this.challenge)
+    }
+  }
 }
 </script>
 

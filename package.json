@@ -28,6 +28,7 @@
     "vue-router": "4",
     "vue-social-sharing": "^4.0.0-alpha4",
     "vue-typer": "^1.2.0",
+    "vue3-clipboard": "^1.0.0",
     "vue3-lottie": "^1.4.0",
     "vue3-mq": "^3.0.2",
     "vuex": "^4.0.2"

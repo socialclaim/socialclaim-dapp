@@ -198,11 +198,11 @@
                   </div>
                 </div>
                 <div v-if="twitter.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful'" v-on:click="requestVerification(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
                   </button>
 
-                  <button v-else-if="state === 'afterChallengeRecieved' || state === 'VerificationError'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
                   </button>
                 </div>
@@ -227,11 +227,11 @@
                   </div>
                 </div>
                 <div v-if="tiktok.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful'" v-on:click="requestVerification(tiktok.url, tiktok.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(tiktok.url, tiktok.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
                   </button>
 
-                  <button v-else-if="state === 'afterChallengeRecieved' || state === 'VerificationError'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
                   </button>
                 </div>
@@ -256,11 +256,11 @@
                 </div>
                 <div v-if="twitch.url.length > 0" class="mt-5">
 
-                  <button v-if="state === 'init' || state === 'verificationSuccessful'" v-on:click="requestVerification(twitch.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitch.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
                   </button>
 
-                  <button v-else-if="state === 'afterChallengeRecieved' || state === 'VerificationError'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
                   </button>
                 </div>
@@ -308,7 +308,7 @@ export default {
     const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
     const linkInterface = new ethers.utils.Interface(LinkAbi)
     const linkTokenContractAddress = "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
-    const verifiedContractAddress = "0x179D72a30f59870bE34EfD8a449BCCE2E43397Ea"
+    const verifiedContractAddress = "0x894389Ab1c579E6a98fe4B99FC6c4EfaeADD0A62"
     let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
     const linksigner = provider.getSigner()
 
@@ -375,13 +375,14 @@ export default {
     });
 
     this.verifiedContract.on("VerificationResult", (addr, verified) => {
-      console.log(verified)
       if (address.value === addr) {
         _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
         _self.twitter.url = ''
         _self.tiktok.url = ''
         _self.twitch.url = ''
         _self.errorState = false
+        _self.challenge = ''
+        _self.linkAmount = null
       }
     });
   },

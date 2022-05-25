@@ -7,10 +7,14 @@ import { Vue3Mq } from "vue3-mq";
 import { VueDapp } from 'vue-dapp'
 import VueCollapsiblePanel from '@dafcoe/vue-collapsible-panel'
 import '@dafcoe/vue-collapsible-panel/dist/vue-collapsible-panel.css'
+import VueClipboard from 'vue3-clipboard'
 
 const head = createHead()
 import './index.css'
 import store from './store'
 
-createApp(App).use(VueDapp,  { appUrl: "https://verified.nescrypto.com" }).use(store).use(router).use(head).use(Vue3Mq).use(VueCollapsiblePanel).use(VueGtag, {property: {id: "G-Q5S6T2RX7H"}}).mount('#app');
+createApp(App).use(VueDapp,  { appUrl: "https://verified.nescrypto.com" }).use(store).use(router).use(head).use(Vue3Mq).use(VueClipboard, {
+  autoSetContainer: true,
+  appendToBody: true,
+}).use(VueCollapsiblePanel).use(VueGtag, {property: {id: "G-Q5S6T2RX7H"}}).mount('#app');
 
