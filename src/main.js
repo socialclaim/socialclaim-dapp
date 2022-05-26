@@ -11,10 +11,9 @@ import VueClipboard from 'vue3-clipboard'
 
 const head = createHead()
 import './index.css'
-import store from './store'
 
-createApp(App).use(VueDapp,  { appUrl: "https://verified.nescrypto.com" }).use(store).use(router).use(head).use(Vue3Mq).use(VueClipboard, {
+createApp(App).use(VueDapp,  { appUrl: process.env.VUE_APP_URL }).use(router).use(head).use(Vue3Mq).use(VueClipboard, {
   autoSetContainer: true,
   appendToBody: true,
-}).use(VueCollapsiblePanel).use(VueGtag, {property: {id: "G-Q5S6T2RX7H"}}).mount('#app');
+}).use(VueCollapsiblePanel).use(VueGtag, {property: {id: process.env.VUE_APP_GTAG}}).mount('#app');
 

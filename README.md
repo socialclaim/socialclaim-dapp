@@ -1,24 +1,41 @@
-# nomadgroups-vue
+<img src="https://svgur.com/i/gyQ.svg" width="200"/>
+
+# Verified dapp
+
+## Live version
+[verified.nescrypto.com](https://verified.nescrypto.com)
+
+## How to use video
+https://www.youtube.com/watch?v=WsTZ4JY_df4&feature=youtu.be
 
 ## Project setup
+```shell
+npm install
 ```
-yarn install
+## ENV variables
+```shell
+export VUE_APP_VERIFIED_CONTACT_ADDR="0x000"
+export VUE_APP_LINK_CONTRACT_ADDR="0x000"
+export VUE_APP_RPC_PROVIDER="https://..."
+export VUE_APP_REQUIRED_CHAIN_ID="00"
+export VUE_APP_SAMPLE_BSC_REPORT_ADDRESS="0x000"
+export VUE_APP_URL="https://..."
+export VUE_APP_GTAG="G-XXXXX"
 ```
 
-### Compiles and hot-reloads for development
+
+### Easy deploy with dokku
 ```
-yarn serve
+// On the remote server
+dokku apps:create verified
+dokku config:set verified NGINX_ROOT=dist
+dokku config:set verified VUE_APP_VERIFIED_CONTACT_ADDR="0x000"
+dokku config:set verified VUE_APP_LINK_CONTRACT_ADDR="0x000"
+dokku config:set ...
+
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+npm run build
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

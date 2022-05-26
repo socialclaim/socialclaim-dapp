@@ -116,8 +116,9 @@
       const { open } = useBoard()
       const { isActivated, address } = useEthers()
       const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
-      const verifiedContractAddr = "0x894389Ab1c579E6a98fe4B99FC6c4EfaeADD0A62"
-      let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
+      const verifiedContractAddr = process.env.VUE_APP_VERIFIED_CONTACT_ADDR
+      let provider = new ethers.providers.JsonRpcProvider(process.env.VUE_APP_RPC_PROVIDER)
+      const sampleBSCReportAddress = process.env.VUE_APP_SAMPLE_BSC_REPORT_ADDRESS || ""
       const linksigner = provider.getSigner()
       const verifiedContract = new ethers.Contract(
           verifiedContractAddr,
@@ -129,7 +130,8 @@
         isActivated,
         open,
         verifiedContract,
-        address
+        address,
+        sampleBSCReportAddress
       };
     },
     data() {
@@ -153,7 +155,7 @@
         this.searchAddress = address.value
       },
       loadSample() {
-        this.searchAddress = "0x5a421c49B364114aEcE1f7d3e37aee5421677cBF"
+        this.searchAddress = this.sampleBSCReportAddress
       },
       getVerificationsForAddress() {
         this.loading = true

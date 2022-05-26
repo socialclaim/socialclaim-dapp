@@ -307,9 +307,10 @@ export default {
 
     const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
     const linkInterface = new ethers.utils.Interface(LinkAbi)
-    const linkTokenContractAddress = "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
-    const verifiedContractAddress = "0x894389Ab1c579E6a98fe4B99FC6c4EfaeADD0A62"
-    let provider = new ethers.providers.JsonRpcProvider( "https://data-seed-prebsc-1-s1.binance.org:8545")
+    const linkTokenContractAddress = process.env.VUE_APP_LINK_CONTRACT_ADDR
+    const verifiedContractAddress = process.env.VUE_APP_VERIFIED_CONTACT_ADDR
+    const requiredChainId = process.env.VUE_APP_REQUIRED_CHAIN_ID
+    let provider = new ethers.providers.JsonRpcProvider(process.env.VUE_APP_RPC_PROVIDER)
     const linksigner = provider.getSigner()
 
     const linkContract = new ethers.Contract(
@@ -334,7 +335,8 @@ export default {
       linkContract,
       verifiedContractAddress,
       verifiedContract,
-      signer
+      signer,
+      requiredChainId
     };
   },
   components: {
@@ -347,17 +349,17 @@ export default {
     const { onActivated, onChanged } = useEthersHooks()
 
     onActivated(({ provider }) => {
-      if (provider.network.chainId === 97)
+      if (provider.network.chainId.toString() === this.requiredChainId)
         this.isActivated = true
       else
-        alert("Please re-connect using the Binance Smart Chain Testnet (ID: 97)")
+        alert(`Please re-connect using the Binance Smart Chain Testnet (ID: ${this.requiredChainId})`)
     })
 
     onChanged(({ provider }) => {
-      if (provider.network.chainId === 97)
+      if (provider.network.chainId.toString() === this.requiredChainId)
         this.isActivated = true
       else
-        alert("Please re-connect using the Binance Smart Chain Testnet (ID: 97)")
+        alert(`Please re-connect using the Binance Smart Chain Testnet (ID: ${this.requiredChainId})`)
     })
 
     this.verifiedContract.on("PaymentSet", (addr, balance) => {
