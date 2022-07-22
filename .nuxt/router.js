@@ -4,7 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _bf180ab0 = () => interopDefault(import('../../../.nvm/versions/node/v15.4.0/lib/node_modules/nuxt/node_modules/@nuxt/vue-app/template/pages/index.vue' /* webpackChunkName: "" */))
+const _bf180ab0 = () => interopDefault(import('../../../../.nvm/versions/node/v15.4.0/lib/node_modules/nuxt/node_modules/@nuxt/vue-app/template/pages/index.vue' /* webpackChunkName: "" */))
 
 const emptyFn = () => {}
 

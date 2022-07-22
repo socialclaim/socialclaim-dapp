@@ -93,7 +93,7 @@
 </style>
 <template>
   <section id="verify" >
-    <div class="grid grid-cols-1 md:grid-cols-2 px-4  pb-20 gap-6 mx-auto max-w-screen-lg">
+    <div class=" text-white grid grid-cols-1 md:grid-cols-2 px-4  pb-20 gap-6 mx-auto max-w-screen-lg">
       <div class="mt-12" v-if="!isActivated">
         <div class="font-bold leading-relaxed mt-16 lg:text-5xl ">
           Let the Crypto 🌎<br /> know you are the <span class="text-secondary underline">right</span> person

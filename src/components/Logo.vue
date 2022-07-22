@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-16 mb-2">
-    <img src="/images/verified.svg"  class="block  h-12 w-20 mt-2" />
+  <div class="relative h-8 mb-4">
+    <img src="/images/claimwallet.svg"  class="block  h-12 w-16" />
   </div>
 </template>

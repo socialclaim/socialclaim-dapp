@@ -1,6 +1,6 @@
 <style>
 body {
-  background-image: url("/images/so-white.png");
+  background-image: url("/images/stardust.png");
 }
 </style>
 

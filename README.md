@@ -1,9 +1,9 @@
-<img src="https://svgur.com/i/gyQ.svg" width="200"/>
+<img src="https://svgur.com/i/jN9.svg" width="200"/>
 
 # Verified dapp
 
 ## Live version
-[verified.nescrypto.com](https://verified.nescrypto.com)
+[socialclaim.nescrypto.com](https://socialclaim.nescrypto.com)
 
 ## How to use video
 https://www.youtube.com/watch?v=WsTZ4JY_df4&feature=youtu.be

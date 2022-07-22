@@ -1,40 +1,6 @@
-<style>
-
-.wave-bottom-black {
-  position: relative;
-}
-
-.wave-bottom-black::before,
-.wave-bottom-black::after {
-
-}
-
-.wave-bottom-black::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  background-size: 20px 65px;
-  background-image: radial-gradient(circle at 10px -15px, transparent 20px, #fff 21px);
-}
-
-.wave-bottom-black::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 15px;
-  background-size: 40px 40px;
-  background-image: radial-gradient(circle at 10px 26px, #fff 20px, transparent 21px);
-}
-
-</style>
 
 <template>
-  <header class=" w-full px-2 md:py-1 wave-bottom-black bg-secondary bg-secondarymedium  sm:px-4">
+  <header class=" w-full px-2 md:py-1  bg-secondary bg-secondarymedium  sm:px-4">
     <div class="container flex items-center justify-between mx-auto max-w-screen-lg">
       <a href="#" class="flex items-center pl-2">
         <Logo />
