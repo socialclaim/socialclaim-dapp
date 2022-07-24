@@ -4,16 +4,16 @@
 </template>
 <style>
 @font-face {
-  font-family: "Poppins";
-  src: local("Poppins"),
-  url(./fonts/Poppins-Medium.ttf) format("truetype");
+  font-family: "Rubik";
+  src: local("Rubik"),
+  url(./fonts/Rubik-Regular.ttf) format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: local("Poppins-ExtraBold"),
-  url(./fonts/Poppins-Medium.ttf) format("truetype");
+  font-family: "Rubik";
+  src: local("Rubik-ExtraBold"),
+  url(./fonts/Rubik-ExtraBold.ttf) format("truetype");
   font-weight: bold;
 }
 

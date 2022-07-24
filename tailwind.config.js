@@ -1,10 +1,11 @@
 module.exports = {
+  darkMode: 'class',
   variants: {
 
   },
   theme: {
     fontFamily: {
-      sans: ['"Poppins"']
+      sans: ['"Rubik"']
     },
     extend: {
       colors: {
@@ -14,7 +15,7 @@ module.exports = {
         secondarylight: '#cfd4f8',
         secondarysuperlight: '#eceff8',
         lightbrown: '#a33c02',
-        tertiary: '#444444',
+        tertiary: '#ff9719ff',
         unclaimed: '#fb8500ff'
       }
     }

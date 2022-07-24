@@ -148,145 +148,159 @@
         <div class="mt-28"  v-else></div>
       </div>
       <div class="md:mt-20 relative cursor-pointer outline-none">
-        <div class="px-4 pt-4 max-w-md bg-white rounded-lg border shadow-md  dark:bg-gray-800 dark:border-gray-700">
-          <div class="flex  items-center mb-2 pb-2 border-b-4 border-gray-200">
-            <img src="/images/logos/wallet.svg"  class="fill-cyan-500 pt-2 text-secondary block object-contain h-16" />
-            <div v-if="!isActivated" >
-              <a @click="open">
-                <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">Wallet not connected<br />
-                  <span  class="text-xs text-gray-500 font-light">Connect with metamask</span></h5>
-              </a>
-            </div>
-            <div v-else class="flex items-center">
-              <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">{{  shortenAddress(address) }}<br />
-                <span class="text-xs text-gray-500 font-light">{{ displayEther(balance) }} TBNB</span></h5>
-              <div class="flex-col ml-5">
-                <div>
-                  <label for="transfer" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
-                  <div class="relative">
-                    <input type="number" step=".1" id="transfer" v-model="linkAmount" class="block p-4  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0.2" required>
-                    <button @click="transfer()" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send $LINK</button>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-xs text-gray-500 font-light" >$LINK Credits : <span v-if="linkBalance">{{linkBalance}}</span><span v-else> <a class="text-xs text-secondary" @click="checkBalance()">Get balance</a></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="w-full relative h-16">
+<!--          <li class="w-full relative h-14">-->
+            <div class="absolute right-0 top-1 w-full h-full rounded-lg bg-secondarymedium"></div>
+            <div class="absolute right-2 top-0 w-full h-full rounded-lg bg-tertiary"></div>
 
-          <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>
-
-          <div class="flow-root">
-            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-              <li class="py-5" data-aos="zoom-in" >
-                <div class="flex items-center space-x-4">
-                  <div class="flex-shrink-0">
-                    <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <form>
-                      <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
-                      <span v-if="twitter.url.length > 0">
-            <label class="text-xs text-secondary" for="twitter_element">Current valid twitter Bio HTML selector :</label>
-            <input disabled="disabled" :value="twitter.element" type="text" id="twitter_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
-          </span>
-                    </form>
-                  </div>
-                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    <img v-if="twitter.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
-                  </div>
-                </div>
-                <div v-if="twitter.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
-                  </button>
-
-                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
-                  </button>
-                </div>
-              </li>
-
-              <li class="py-5" data-aos="zoom-in" >
-                <div class="flex items-center space-x-4">
-                  <div class="flex-shrink-0">
-                    <img class="w-12 h-8 " src="/images/tiktok.svg" alt="Neil image">
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <form>
-                      <input :disabled="!isActivated  || twitter.url.length > 0 || twitch.url.length > 0" type="text" id="tiktok" v-model="tiktok.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://tiktok.com/@username" required>
-                      <span v-if="tiktok.url.length > 0">
-            <label class="text-xs text-secondary" for="twitter_element">Current valid Tiktok Bio HTML selector :</label>
-            <input disabled="disabled" :value="tiktok.element" type="text" id="tiktok_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
-          </span>
-                    </form>
-                  </div>
-                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    <img v-if="tiktok.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
-                  </div>
-                </div>
-                <div v-if="tiktok.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(tiktok.url, tiktok.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
-                  </button>
-
-                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
-                  </button>
-                </div>
-              </li>
-              <li class="py-5" data-aos="zoom-in" >
-                <div class="flex items-center space-x-4">
-                  <div class="flex-shrink-0">
-                    <img class="w-12 h-12" src="/images/twitch.svg" alt="Neil image">
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <form>
-                      <input :disabled="!isActivated || twitter.url.length > 0 || tiktok.url.length > 0" type="url" id="twitch" v-model="twitch.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitch.com/username/about" required>
-                      <span v-if="twitch.url.length > 0">
-            <label class="text-xs text-secondary" for="twitter_element">Current valid Twitch 'About' HTML selector :</label>
-            <input disabled="disabled" :value="twitch.element" type="text" id="twitch_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
-            </span>
-                    </form>
-                  </div>
-                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    <img v-if="twitch.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />
-                  </div>
-                </div>
-                <div v-if="twitch.url.length > 0" class="mt-5">
-
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitch.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification
-                  </button>
-
-                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify
-                  </button>
-                </div>
-              </li>
-
-              <li class="py-5" data-aos="zoom-in" >
-                <div class="flex items-center space-x-4">
-                  <div class="flex-shrink-0">
-                    <div class="flex-1 min-w-0 relative">
-                      <img src="/images/logo.svg"  class="block  h-10 w-8 ml-10" />
-                      <div class="absolute left-0   bottom-0"><div class=" bg-black ml-0  mt-1 md:mt-0 text-xs rounded-xl text-white px-2 font-bold">Verified</div></div>
-                    </div>
-                  </div>
-
-                  <div class="flex-1 min-w-0">
-                    <div class=" text-gray-500 text-sm ">Will allow to verify most websites without a login wall. More will be added soon when the DAO is live !</div>
-                  </div>
-                  <div class="inline-flex">
-                    <div class="w-6"></div>
-                  </div>
-                </div>
-              </li>
-
-            </ul>
-          </div>
+          <ul class="absolute w-full z-10 right-1 top-1 hidden text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+            <li class="w-full">
+              <a href="#" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-secondary dark:text-white" aria-current="page">Create a wallet</a>
+            </li>
+            <li class="w-full relative">
+              <a href="#" class="inline-block p-4 w-full bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-secondary dark:hover:bg-gray-700">Claim a wallet</a>
+            </li>
+          </ul>
         </div>
+<!--        <div class="px-4 pt-4 max-w-md bg-white rounded-lg border shadow-md  dark:bg-gray-800 dark:border-gray-700">-->
+<!--          <div class="flex  items-center mb-2 pb-2 border-b-4 border-gray-200">-->
+<!--            <img src="/images/logos/wallet.svg"  class="fill-cyan-500 pt-2 text-secondary block object-contain h-16" />-->
+<!--            <div v-if="!isActivated" >-->
+<!--              <a @click="open">-->
+<!--                <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">Wallet not connected<br />-->
+<!--                  <span  class="text-xs text-gray-500 font-light">Connect with metamask</span></h5>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--            <div v-else class="flex items-center">-->
+<!--              <h5 class="ml-3 text-xl font-bold leading-none text-gray-900 dark:text-white">{{  shortenAddress(address) }}<br />-->
+<!--                <span class="text-xs text-gray-500 font-light">{{ displayEther(balance) }} TBNB</span></h5>-->
+<!--              <div class="flex-col ml-5">-->
+<!--                <div>-->
+<!--                  <label for="transfer" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>-->
+<!--                  <div class="relative">-->
+<!--                    <input type="number" step=".1" id="transfer" v-model="linkAmount" class="block p-4  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0.2" required>-->
+<!--                    <button @click="transfer()" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send $LINK</button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                  <span class="text-xs text-gray-500 font-light" >$LINK Credits : <span v-if="linkBalance">{{linkBalance}}</span><span v-else> <a class="text-xs text-secondary" @click="checkBalance()">Get balance</a></span></span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>-->
+
+<!--          <div class="flow-root">-->
+<!--            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">-->
+<!--              <li class="py-5" data-aos="zoom-in" >-->
+<!--                <div class="flex items-center space-x-4">-->
+<!--                  <div class="flex-shrink-0">-->
+<!--                    <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">-->
+<!--                  </div>-->
+<!--                  <div class="flex-1 min-w-0">-->
+<!--                    <form>-->
+<!--                      <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>-->
+<!--                      <span v-if="twitter.url.length > 0">-->
+<!--          <label class="text-xs text-secondary" for="twitter_element">Current valid twitter Bio HTML selector :</label>-->
+<!--          <input disabled="disabled" :value="twitter.element" type="text" id="twitter_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>-->
+<!--        </span>-->
+<!--                    </form>-->
+<!--                  </div>-->
+<!--                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">-->
+<!--                    <img v-if="twitter.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div v-if="twitter.url.length > 0" class="mt-5">-->
+<!--                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification-->
+<!--                  </button>-->
+
+<!--                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              <li class="py-5" data-aos="zoom-in" >-->
+<!--                <div class="flex items-center space-x-4">-->
+<!--                  <div class="flex-shrink-0">-->
+<!--                    <img class="w-12 h-8 " src="/images/tiktok.svg" alt="Neil image">-->
+<!--                  </div>-->
+<!--                  <div class="flex-1 min-w-0">-->
+<!--                    <form>-->
+<!--                      <input :disabled="!isActivated  || twitter.url.length > 0 || twitch.url.length > 0" type="text" id="tiktok" v-model="tiktok.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://tiktok.com/@username" required>-->
+<!--                      <span v-if="tiktok.url.length > 0">-->
+<!--          <label class="text-xs text-secondary" for="twitter_element">Current valid Tiktok Bio HTML selector :</label>-->
+<!--          <input disabled="disabled" :value="tiktok.element" type="text" id="tiktok_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>-->
+<!--        </span>-->
+<!--                    </form>-->
+<!--                  </div>-->
+<!--                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">-->
+<!--                    <img v-if="tiktok.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div v-if="tiktok.url.length > 0" class="mt-5">-->
+<!--                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(tiktok.url, tiktok.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification-->
+<!--                  </button>-->
+
+<!--                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="py-5" data-aos="zoom-in" >-->
+<!--                <div class="flex items-center space-x-4">-->
+<!--                  <div class="flex-shrink-0">-->
+<!--                    <img class="w-12 h-12" src="/images/twitch.svg" alt="Neil image">-->
+<!--                  </div>-->
+<!--                  <div class="flex-1 min-w-0">-->
+<!--                    <form>-->
+<!--                      <input :disabled="!isActivated || twitter.url.length > 0 || tiktok.url.length > 0" type="url" id="twitch" v-model="twitch.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitch.com/username/about" required>-->
+<!--                      <span v-if="twitch.url.length > 0">-->
+<!--          <label class="text-xs text-secondary" for="twitter_element">Current valid Twitch 'About' HTML selector :</label>-->
+<!--          <input disabled="disabled" :value="twitch.element" type="text" id="twitch_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>-->
+<!--          </span>-->
+<!--                    </form>-->
+<!--                  </div>-->
+<!--                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">-->
+<!--                    <img v-if="twitch.url.length === 0" src="/images/unverified.svg"  class="block object-contain h-12 " />-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div v-if="twitch.url.length > 0" class="mt-5">-->
+
+<!--                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitch.url, twitch.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/go.svg"  class="inline-block object-contain h-8 " />Start verification-->
+<!--                  </button>-->
+
+<!--                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/go.svg"  class="inline-block object-contain h-5 " />Verify-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              <li class="py-5" data-aos="zoom-in" >-->
+<!--                <div class="flex items-center space-x-4">-->
+<!--                  <div class="flex-shrink-0">-->
+<!--                    <div class="flex-1 min-w-0 relative">-->
+<!--                      <img src="/images/logo.svg"  class="block  h-10 w-8 ml-10" />-->
+<!--                      <div class="absolute left-0   bottom-0"><div class=" bg-black ml-0  mt-1 md:mt-0 text-xs rounded-xl text-white px-2 font-bold">Verified</div></div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+<!--                  <div class="flex-1 min-w-0">-->
+<!--                    <div class=" text-gray-500 text-sm ">Will allow to verify most websites without a login wall. More will be added soon when the DAO is live !</div>-->
+<!--                  </div>-->
+<!--                  <div class="inline-flex">-->
+<!--                    <div class="w-6"></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
   </section>

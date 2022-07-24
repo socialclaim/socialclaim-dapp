@@ -5,7 +5,7 @@ body {
 </style>
 
 <template>
-  <div>
+  <div class="dark">
     <TheHeader />
     <Hero />
     <Directory />
@@ -22,7 +22,6 @@ export default {
   components: {
     Hero,
     TheHeader,
-    Directory,
     TheFooter
   }
 }
