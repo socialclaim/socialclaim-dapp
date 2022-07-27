@@ -109,14 +109,14 @@
   <script>
   import {useBoard, useEthers} from 'vue-dapp'
   import {ethers} from "ethers"
-  import VerifiedAbi from "../../abis/verified.json"
+  import VerifiedAbi from "../../abis/socialclaim.json"
 
   export default {
     setup() {
       const { open } = useBoard()
       const { isActivated, address } = useEthers()
       const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
-      const verifiedContractAddr = process.env.VUE_APP_VERIFIED_CONTACT_ADDR
+      const verifiedContractAddr = process.env.VUE_APP_SOCIALCLAIM_CONTACT_ADDR
       let provider = new ethers.providers.JsonRpcProvider(process.env.VUE_APP_RPC_PROVIDER)
       const sampleBSCReportAddress = process.env.VUE_APP_SAMPLE_BSC_REPORT_ADDRESS || ""
       const linksigner = provider.getSigner()

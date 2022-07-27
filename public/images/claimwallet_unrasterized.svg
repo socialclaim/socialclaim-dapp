@@ -12,7 +12,7 @@
    version="1.1"
    viewBox="0 0 502.91516 347.74222"
    id="svg20"
-   sodipodi:docname="claimwallet.svg"
+   sodipodi:docname="claimwallet_unrasterized.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
      id="metadata26">
@@ -595,61 +595,39 @@
            style="fill:#000b48;fill-opacity:1" />
       </g>
     </g>
-    <g
-       aria-label="SOCIAL 
-"
-       id="text435"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:110px;line-height:0.7;font-family:'Gurmukhi MT';-inkscape-font-specification:'Gurmukhi MT Bold';text-align:start;text-anchor:start;fill:#000000;stroke-width:0.75">
-      <path
-         d="m 186.84027,399.90789 q -10.23,0 -17.16,-2.97 -6.82,-3.08 -10.45,-7.92 -3.52,-4.95 -3.74,-10.34 0,-0.99 0.66,-1.65 0.66,-0.66 1.65,-0.66 h 9.79 q 1.43,0 2.09,0.66 0.77,0.55 1.32,1.43 0.66,2.09 2.53,4.18 1.87,1.98 5.06,3.3 3.3,1.32 8.25,1.32 7.92,0 11.77,-2.64 3.96,-2.64 3.96,-7.15 0,-3.19 -2.09,-5.06 -2.09,-1.98 -6.49,-3.52 -4.29,-1.65 -11.44,-3.41 -8.25,-1.98 -13.86,-4.73 -5.5,-2.86 -8.36,-7.15 -2.75,-4.29 -2.75,-10.89 0,-6.38 3.41,-11.33 3.52,-4.95 9.9,-7.81 6.49,-2.86 15.4,-2.86 7.15,0 12.65,1.98 5.5,1.87 9.13,5.06 3.63,3.08 5.5,6.71 1.98,3.52 2.09,6.93 0,0.88 -0.66,1.65 -0.55,0.66 -1.65,0.66 h -10.23 q -0.88,0 -1.76,-0.44 -0.88,-0.44 -1.43,-1.65 -0.66,-3.41 -4.29,-5.83 -3.63,-2.42 -9.35,-2.42 -5.94,0 -9.57,2.2 -3.63,2.2 -3.63,6.82 0,3.08 1.76,5.17 1.87,1.98 5.83,3.52 4.07,1.54 10.67,3.3 9.35,2.09 15.29,4.84 5.94,2.75 8.69,7.04 2.75,4.18 2.75,10.67 0,7.26 -3.96,12.43 -3.85,5.06 -10.89,7.81 -7.04,2.75 -16.39,2.75 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75"
-         id="path3201" />
-      <path
-         d="m 260.38387,399.90789 q -9.79,0 -16.83,-3.19 -7.04,-3.3 -11,-10.01 -3.96,-6.82 -4.29,-16.94 -0.11,-4.73 -0.11,-9.35 0,-4.62 0.11,-9.46 0.33,-10.01 4.4,-16.72 4.07,-6.71 11.11,-10.12 7.15,-3.41 16.61,-3.41 9.46,0 16.61,3.41 7.15,3.41 11.22,10.12 4.07,6.71 4.4,16.72 0.22,4.84 0.22,9.46 0,4.62 -0.22,9.35 -0.33,10.12 -4.29,16.94 -3.96,6.71 -11.11,10.01 -7.04,3.19 -16.83,3.19 z m 0,-12.65 q 7.15,0 11.66,-4.18 4.51,-4.29 4.84,-13.86 0.22,-4.84 0.22,-8.91 0,-4.18 -0.22,-8.91 -0.22,-6.38 -2.42,-10.34 -2.09,-4.07 -5.72,-5.83 -3.63,-1.87 -8.36,-1.87 -4.62,0 -8.25,1.87 -3.63,1.76 -5.83,5.83 -2.09,3.96 -2.31,10.34 -0.11,4.73 -0.11,8.91 0,4.07 0.11,8.91 0.33,9.57 4.84,13.86 4.51,4.18 11.55,4.18 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75"
-         id="path3203" />
-      <path
-         d="m 336.97824,399.90789 q -10.23,0 -17.38,-3.52 -7.04,-3.63 -10.78,-10.23 -3.74,-6.71 -4.18,-16.06 -0.11,-4.51 -0.11,-9.68 0,-5.17 0.11,-9.9 0.44,-9.24 4.18,-15.95 3.85,-6.71 10.89,-10.23 7.15,-3.63 17.27,-3.63 7.48,0 13.42,1.98 5.94,1.98 10.12,5.5 4.18,3.41 6.49,8.03 2.31,4.62 2.42,10.01 0.11,0.99 -0.66,1.65 -0.66,0.66 -1.65,0.66 h -10.45 q -1.21,0 -1.98,-0.55 -0.77,-0.66 -1.1,-2.09 -1.76,-7.26 -6.05,-9.9 -4.29,-2.64 -10.67,-2.64 -7.37,0 -11.77,4.18 -4.4,4.07 -4.73,13.53 -0.33,9.02 0,18.48 0.33,9.46 4.73,13.64 4.4,4.07 11.77,4.07 6.38,0 10.67,-2.64 4.4,-2.75 6.05,-9.9 0.33,-1.54 1.1,-2.09 0.77,-0.55 1.98,-0.55 h 10.45 q 0.99,0 1.65,0.66 0.77,0.66 0.66,1.65 -0.11,5.39 -2.42,10.01 -2.31,4.62 -6.49,8.14 -4.18,3.41 -10.12,5.39 -5.94,1.98 -13.42,1.98 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75"
-         id="path3205" />
-      <path
-         d="m 385.11355,398.80789 q -1.1,0 -1.87,-0.77 -0.77,-0.77 -0.77,-1.87 v -71.72 q 0,-1.1 0.77,-1.87 0.77,-0.77 1.87,-0.77 h 10.34 q 1.21,0 1.87,0.77 0.77,0.77 0.77,1.87 v 71.72 q 0,1.1 -0.77,1.87 -0.66,0.77 -1.87,0.77 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75"
-         id="path3207" />
-      <path
-         d="m 410.61465,398.80789 q -0.88,0 -1.65,-0.66 -0.66,-0.66 -0.66,-1.65 0,-0.44 0.22,-0.99 l 26.51,-70.95 q 0.33,-1.1 1.21,-1.87 0.99,-0.88 2.64,-0.88 h 11.99 q 1.65,0 2.53,0.88 0.88,0.77 1.32,1.87 l 26.51,70.95 q 0.11,0.55 0.11,0.99 0,0.99 -0.66,1.65 -0.66,0.66 -1.54,0.66 h -9.57 q -1.54,0 -2.31,-0.66 -0.66,-0.77 -0.88,-1.43 l -5.17,-13.42 h -32.67 l -5.17,13.42 q -0.22,0.66 -0.99,1.43 -0.66,0.66 -2.2,0.66 z m 21.78,-28.16 h 24.97 l -12.54,-33.99 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75"
-         id="path3209" />
-      <path
-         d="m 494.25418,398.80789 q -1.1,0 -1.87,-0.77 -0.77,-0.77 -0.77,-1.87 v -71.72 q 0,-1.1 0.77,-1.87 0.77,-0.77 1.87,-0.77 h 10.23 q 1.1,0 1.87,0.77 0.77,0.77 0.77,1.87 v 61.27 h 34.87 q 1.21,0 1.98,0.77 0.77,0.77 0.77,1.98 v 7.7 q 0,1.1 -0.77,1.87 -0.77,0.77 -1.98,0.77 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75"
-         id="path3211" />
-    </g>
-    <g
-       aria-label="CLAIM
-"
-       id="text435-6"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:110px;line-height:0.7;font-family:'Gurmukhi MT';-inkscape-font-specification:'Gurmukhi MT Bold';text-align:start;text-anchor:start;fill:#000000;stroke-width:0.75">
-      <path
-         d="m 178.5755,466.06801 q -6.51,0 -11.06,-2.24 -4.48,-2.31 -6.86,-6.51 -2.38,-4.27 -2.66,-10.22 -0.07,-2.87 -0.07,-6.16 0,-3.29 0.07,-6.3 0.28,-5.88 2.66,-10.15 2.45,-4.27 6.93,-6.51 4.55,-2.31 10.99,-2.31 4.76,0 8.54,1.26 3.78,1.26 6.44,3.5 2.66,2.17 4.13,5.11 1.47,2.94 1.54,6.37 0.07,0.63 -0.42,1.05 -0.42,0.42 -1.05,0.42 h -6.65 q -0.77,0 -1.26,-0.35 -0.49,-0.42 -0.7,-1.33 -1.12,-4.62 -3.85,-6.3 -2.73,-1.68 -6.79,-1.68 -4.69,0 -7.49,2.66 -2.8,2.59 -3.01,8.61 -0.21,5.74 0,11.76 0.21,6.02 3.01,8.68 2.8,2.59 7.49,2.59 4.06,0 6.79,-1.68 2.8,-1.75 3.85,-6.3 0.21,-0.98 0.7,-1.33 0.49,-0.35 1.26,-0.35 h 6.65 q 0.63,0 1.05,0.42 0.49,0.42 0.42,1.05 -0.07,3.43 -1.54,6.37 -1.47,2.94 -4.13,5.18 -2.66,2.17 -6.44,3.43 -3.78,1.26 -8.54,1.26 z"
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:110px;line-height:0.7;font-family:'Gurmukhi MT';-inkscape-font-specification:'Gurmukhi MT Bold';text-align:start;text-anchor:start;fill:#000000;stroke-width:0.75"
+       x="360.3584"
+       y="398.80789"
+       id="text435"><tspan
+         sodipodi:role="line"
+         x="360.3584"
+         y="398.80789"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
+         id="tspan466"><tspan
+           id="tspan1431"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.75">SOCIAL </tspan></tspan><tspan
+         sodipodi:role="line"
+         x="360.3584"
+         y="475.80789"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
+         id="tspan1433" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:110px;line-height:0.7;font-family:'Gurmukhi MT';-inkscape-font-specification:'Gurmukhi MT Bold';text-align:start;text-anchor:start;fill:#000000;stroke-width:0.75"
+       x="154.2155"
+       y="465.36801"
+       id="text435-6"><tspan
+         sodipodi:role="line"
+         x="154.2155"
+         y="465.36801"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:70px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
-         id="path3190" />
-      <path
-         d="m 209.20706,465.36801 q -0.7,0 -1.19,-0.49 -0.49,-0.49 -0.49,-1.19 v -45.64 q 0,-0.7 0.49,-1.19 0.49,-0.49 1.19,-0.49 h 6.51 q 0.7,0 1.19,0.49 0.49,0.49 0.49,1.19 v 38.99 h 22.19 q 0.77,0 1.26,0.49 0.49,0.49 0.49,1.26 v 4.9 q 0,0.7 -0.49,1.19 -0.49,0.49 -1.26,0.49 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:70px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
-         id="path3192" />
-      <path
-         d="m 245.12253,465.36801 q -0.56,0 -1.05,-0.42 -0.42,-0.42 -0.42,-1.05 0,-0.28 0.14,-0.63 l 16.87,-45.15 q 0.21,-0.7 0.77,-1.19 0.63,-0.56 1.68,-0.56 h 7.63 q 1.05,0 1.61,0.56 0.56,0.49 0.84,1.19 l 16.87,45.15 q 0.07,0.35 0.07,0.63 0,0.63 -0.42,1.05 -0.42,0.42 -0.98,0.42 h -6.09 q -0.98,0 -1.47,-0.42 -0.42,-0.49 -0.56,-0.91 l -3.29,-8.54 h -20.79 l -3.29,8.54 q -0.14,0.42 -0.63,0.91 -0.42,0.42 -1.4,0.42 z m 13.86,-17.92 h 15.89 l -7.98,-21.63 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:70px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
-         id="path3194" />
-      <path
-         d="m 298.34769,465.36801 q -0.7,0 -1.19,-0.49 -0.49,-0.49 -0.49,-1.19 v -45.64 q 0,-0.7 0.49,-1.19 0.49,-0.49 1.19,-0.49 h 6.58 q 0.77,0 1.19,0.49 0.49,0.49 0.49,1.19 v 45.64 q 0,0.7 -0.49,1.19 -0.42,0.49 -1.19,0.49 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:70px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
-         id="path3196" />
-      <path
-         d="m 319.33566,465.36801 q -0.77,0 -1.26,-0.49 -0.49,-0.49 -0.49,-1.19 v -45.57 q 0,-0.77 0.49,-1.26 0.49,-0.49 1.26,-0.49 h 5.53 q 0.98,0 1.47,0.56 0.49,0.49 0.63,0.77 l 13.51,25.2 13.65,-25.2 q 0.14,-0.28 0.63,-0.77 0.49,-0.56 1.47,-0.56 h 5.46 q 0.77,0 1.26,0.49 0.49,0.49 0.49,1.26 v 45.57 q 0,0.7 -0.49,1.19 -0.49,0.49 -1.26,0.49 h -5.88 q -0.77,0 -1.26,-0.49 -0.42,-0.49 -0.42,-1.19 v -30.31 l -9.8,18.69 q -0.35,0.63 -0.91,1.12 -0.56,0.42 -1.47,0.42 h -2.87 q -0.98,0 -1.54,-0.42 -0.49,-0.49 -0.84,-1.12 l -9.8,-18.69 v 30.31 q 0,0.7 -0.49,1.19 -0.49,0.49 -1.19,0.49 z"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:70px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
-         id="path3198" />
-    </g>
+         id="tspan466-6">CLAIM</tspan><tspan
+         sodipodi:role="line"
+         x="154.2155"
+         y="542.36798"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:110px;font-family:rubik;-inkscape-font-specification:'rubik Medium';text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.75"
+         id="tspan1433-4" /></text>
   </g>
 </svg>
