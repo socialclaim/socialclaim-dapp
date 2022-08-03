@@ -109,7 +109,16 @@
 
               <div class="w-full relative shadow-md sm:rounded-lg">
                <div  class="text-white p-4 ">Latest wallets up for grabs</div>
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <WalletNotifications :errorState="walletsErrorState" />
+
+                <div v-if="walletsLoading">
+                  <svg  class="inline-block w-8 h-8 mr-2 text-gray-100 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#1C64F2"/>
+                  </svg>
+                </div>
+
+                <table v-if="!walletsErrorState && !walletsLoading" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-secondary dark:text-secondarymedium">
                   <tr>
                     <th scope="col" class="py-3 px-6">
@@ -262,13 +271,17 @@
                   </div>
                 </div>
                 <div v-if="twitter.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestVerification(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2" />Start verification
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2" />Request wallet creation
                   </button>
 
-                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Verify
-                  </button>
+                  <div v-if="wallet">
+                    {{JSON.stringify(wallet, null, 2)}}
+                  </div>
+
+<!--                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
+<!--                    <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Verify-->
+<!--                  </button>-->
                 </div>
               </li>
             </ul>
@@ -286,16 +299,18 @@ import { ethers } from "ethers"
 import VerifiedAbi from "../../abis/socialclaim.json"
 import LinkAbi from "../../abis/link.json"
 import Notifications from "../../components/Notifications"
+import WalletNotifications from "../../components/WalletNotifications"
 
 export default {
   setup() {
     const { open } = useBoard()
     const { address, balance, chainId, signer } = useEthers()
-
+    const axios = require('axios').default
     const verifiedInterface = new ethers.utils.Interface(VerifiedAbi)
     const linkInterface = new ethers.utils.Interface(LinkAbi)
     const linkTokenContractAddress = process.env.VUE_APP_LINK_CONTRACT_ADDR
-    const verifiedContractAddress = process.env.VUE_APP_SOCIALCLAIM_CONTACT_ADDR
+    const socialClaimApiURL = process.env.VUE_APP_SOCIALCLAIM_API_URL
+    const socialClaimContractAddress = process.env.VUE_APP_SOCIALCLAIM_CONTACT_ADDR
     const requiredChainId = process.env.VUE_APP_REQUIRED_CHAIN_ID
     let provider = new ethers.providers.JsonRpcProvider(process.env.VUE_APP_RPC_PROVIDER)
     const linksigner = provider.getSigner()
@@ -306,8 +321,8 @@ export default {
         linksigner
     );
 
-    const verifiedContract = new ethers.Contract(
-        verifiedContractAddress,
+    const socialClaimContract = new ethers.Contract(
+        socialClaimContractAddress,
         verifiedInterface,
         linksigner
     );
@@ -320,14 +335,17 @@ export default {
       displayEther,
       shortenAddress,
       linkContract,
-      verifiedContractAddress,
-      verifiedContract,
+      socialClaimContractAddress,
+      socialClaimContract,
       signer,
-      requiredChainId
+      requiredChainId,
+      axios,
+      socialClaimApiURL
     };
   },
   components: {
-    Notifications
+    Notifications,
+    WalletNotifications
   },
   mounted() {
     const { address } = useEthers()
@@ -336,8 +354,10 @@ export default {
     const { onActivated, onChanged } = useEthersHooks()
 
     onActivated(({ provider }) => {
-      if (provider.network.chainId.toString() === this.requiredChainId)
+      if (provider.network.chainId.toString() === this.requiredChainId) {
         this.isActivated = true
+        this.loadWallets()
+      }
       else
         alert(`Please re-connect using the Polygon Mumbai Testnet (ID: ${this.requiredChainId})`)
     })
@@ -349,13 +369,13 @@ export default {
         alert(`Please re-connect using the Polygon Mumbai Testnet (ID: ${this.requiredChainId})`)
     })
 
-    this.verifiedContract.on("PaymentSet", (addr, balance) => {
+    this.socialClaimContract.on("PaymentSet", (addr, balance) => {
       if (address.value === addr) {
         _self.linkBalance = balance / 1000000000000000000
       }
     });
 
-    this.verifiedContract.on("ValidationUpdate", (addr, challenge) => {
+    this.socialClaimContract.on("ValidationUpdate", (addr, challenge) => {
       if (address.value === addr && challenge.toString() !== "0") {
         this.challenge = challenge.toString()
         _self.state = 'afterChallengeRecieved'
@@ -363,7 +383,30 @@ export default {
       }
     });
 
-    this.verifiedContract.on("VerificationResult", (addr, verified) => {
+
+    this.socialClaimContract.on("WalletCreationUpdate", (addr) => {
+      if (address.value === addr) {
+        alert('wallet creation started')
+      }
+    });
+
+    this.socialClaimContract.on("WalletCreated", (addr, walletAddress) => {
+      const _self = this
+      if (address.value === addr) {
+        let id = ethers.utils.toUtf8String(walletAddress);
+        id = `${id.substring(0, 8)}-${id.substring(8, 12)}-${id.substring(12, 16)}-${id.substring(16, 20)}-${id.substring(20)}`
+        this.axios.get(`${this.socialClaimApiURL}/wallets/${id}`)
+            .then(function (response) {
+              _self.wallet = response
+            })
+            .catch(function () {
+            }).then(function(){
+        })
+      }
+    });
+
+
+    this.socialClaimContract.on("VerificationResult", (addr, verified) => {
       if (address.value === addr) {
         _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
         _self.twitter.url = ''
@@ -379,11 +422,15 @@ export default {
     return {
       state: "init",
       errorState: false,
+      walletsErrorState: false,
+      walletsLoading: false,
       linkBalance: null,
       challenge: "",
       linkAmount: .2,
       showGif: false,
       isActivated: false,
+      wallet: null,
+      wallets: [],
       error: "unknown error, please try again",
       twitter: {url: "", element: "div#react-root div > div > div > div:nth-child(3) > div > div > span"},
       tiktok: {url: "", element: "h2[data-e2e='user-bio']"},
@@ -394,11 +441,26 @@ export default {
     toggleGif() {
       this.showGif = !this.showGif
     },
-    requestVerification(url, path) {
+    loadWallets() {
+      let _self = this
+      _self.walletsLoading = true
+      this.axios.get(this.socialClaimApiURL+'/wallets')
+          .then(function (response) {
+            _self.wallets = response.result
+            console.log(response);
+            _self.walletsErrorState = false
+          })
+          .catch(function () {
+            _self.walletsErrorState = true
+          }).then(function(){
+            _self.walletsLoading = false
+          })
+    },
+    requestWalletCreation(url, path) {
       let _self = this
       try {
         const { signer } = useEthers()
-        this.verifiedContract.connect(signer.value).requestVerification(url, path).then(function(){
+        this.socialClaimContract.connect(signer.value).requestWalletCreation(url, path).then(function(){
           _self.state = 'afterVerificationRequest'
         }, function(error) {
           _self.error = error.data.message
@@ -412,7 +474,7 @@ export default {
       let _self = this
       try {
         const { signer } = useEthers()
-        this.verifiedContract.connect(signer.value).verify().then(function(){
+        this.socialClaimContract.connect(signer.value).verify().then(function(){
           _self.state = 'afterManualVerification'
         }, function(error) {
           _self.error = error.data.message
@@ -427,7 +489,7 @@ export default {
       try {
         const { signer } = useEthers()
         const validationData =  ethers.utils.defaultAbiCoder.encode(['uint256'], [0])
-        this.linkContract.connect(signer.value).transferAndCall(this.verifiedContractAddress, ethers.utils.parseUnits(this.linkAmount.toString(), 18), validationData).then(function(){
+        this.linkContract.connect(signer.value).transferAndCall(this.socialClaimContractAddress, ethers.utils.parseUnits(this.linkAmount.toString(), 18), validationData).then(function(){
         })
       } catch (error) {
         console.log(error)
@@ -437,7 +499,7 @@ export default {
       try {
         const { signer } = useEthers()
         const validationData =  ethers.utils.defaultAbiCoder.encode(['uint256'], [0])
-        this.linkContract.connect(signer.value).transferAndCall(this.verifiedContractAddress, ethers.utils.parseUnits("0", 18), validationData).then(function(){
+        this.linkContract.connect(signer.value).transferAndCall(this.socialClaimContractAddress, ethers.utils.parseUnits("0", 18), validationData).then(function(){
         })
       } catch (error) {
         console.log(error)
