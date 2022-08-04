@@ -121,40 +121,24 @@
                 <table v-if="!walletsErrorState && !walletsLoading" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-secondary dark:text-secondarymedium">
                   <tr>
-                    <th scope="col" class="py-3 px-6">
+                    <th scope="col" class="py-3 px-3">
                       URL
                     </th>
-                    <th scope="col" class="py-3 px-6">
-                      Amount
-                    </th>
-                    <th scope="col" class="py-3 px-6">
-                      Claim
+                    <th scope="col" class="py-3 px-3">
+                      INFO
                     </th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="bg-white border-b dark:bg-secondary dark:border-gray-700">
-                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">https://twitter.com/elonmusk</a>
-                    </th>
-                    <td class="py-4 px-6">
-                      445 MATIC
-                    </td>
-                    <td class="py-4 px-6">
+                  <tr v-bind:key="wallet.id" class="bg-white border-b dark:bg-secondary dark:border-gray-700" v-for="wallet in wallets">
+                    <th scope="row" class="py-2 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ wallet.description }}</a><br/>
                       <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Claim</a>
-
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b dark:bg-secondary dark:border-gray-700">
-                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">https://twitter.com/ltt</a>
                     </th>
-                    <td class="py-4 px-6">
-                      334 MATIC
-                    </td>
-                    <td class="py-4 px-6">
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Claim</a>
-
+                    <td class="py-2 pl-2 text-sm ">
+                      <h5 class="font-medium  leading-none text-gray-900 dark:text-white">Address:{{shortenAddress(wallet.address)}} <a class=" underline text-tertiary " @click="doCopy(wallet.address)">Copy </a> <br/>
+                        <span class="text-gray-300 text-md">{{ wallet.balance.balance }} MATIC</span>
+                      </h5>
                     </td>
                   </tr>
                   </tbody>
@@ -253,8 +237,8 @@
 
           <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>
 
-          <div class="flow-root">
-            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <div class="flow-root" >
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" >
               <li class="py-5" data-aos="zoom-in" >
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
@@ -262,7 +246,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+                      <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
                       <span v-if="twitter.url.length > 0">
           <label class="text-xs text-secondary" for="twitter_element">Current valid twitter Bio HTML selector :</label>
           <input disabled="disabled" :value="twitter.element" type="text" id="twitter_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
@@ -271,12 +255,42 @@
                   </div>
                 </div>
                 <div v-if="twitter.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url, twitter.element)" type="button" class=" w-full text-white bg-secondarymedium hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url, twitter.element)" type="button" class=" w-full text-white  hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-tertiary dark:hover:bg-secondary  dark:hover:ring-tertiary focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2" />Request wallet creation
                   </button>
 
                   <div v-if="wallet">
-                    {{JSON.stringify(wallet, null, 2)}}
+                    <div class="w-full relative h-24">
+                      <!--          <li class="w-full relative h-14">-->
+                      <div class="absolute right-0 top-1 mt-1 w-full h-full rounded-lg bg-secondarymedium"></div>
+                      <div class="absolute right-2 top-0 mt-1 w-full h-full rounded-lg bg-tertiary"></div>
+
+                      <div class=" absolute w-full h-20 mt-2 z-10 right-1 top-1 hidden text-lg font-medium  text-gray-500 rounded-lg divide-x divide-gray-200 shadow sm:flex  dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
+                          <img src="/images/logos/wallet.svg"  class=" pt-2 text-white block object-contain h-16" />
+                          <div class="flex items-center">
+                            <h5 class="ml-3 mr-3 text-xl  leading-none text-gray-900 dark:text-white">{{shortenAddress(wallet.address)}}<br/>
+                              <span class="text-xs text-gray-300 font-light">{{ displayEther(wallet.balance.balance) }} MATIC</span><br />
+                              <a class=" underline text-tertiary text-xs" @click="doCopy(wallet.address)">Copy wallet address</a>
+                            </h5>
+                        </div>
+                        <div class="flex items-center">
+                          <h5 class="ml-3 text-xl  leading-none text-gray-900 dark:text-white">URL to claim: <br />
+                            <a class="underline text-xs text-gray-300 font-light" :href="wallet.description">{{wallet.description}}</a><br/>
+                            <a class=" underline text-tertiary text-xs" @click="doCopy(wallet.description)">Copy URL</a>
+                          </h5>
+
+                        </div>
+
+
+                        <!--                        <li class="w-full">-->
+<!--                          <a href="#" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-secondary dark:text-white" aria-current="page">Create a wallet</a>-->
+<!--                        </li>-->
+<!--                        <li class="w-full relative">-->
+<!--                          <a href="#" class="inline-block p-4 w-full bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-secondary dark:hover:bg-gray-700">Claim a wallet</a>-->
+<!--                        </li>-->
+                      </div>
+                    </div>
+
                   </div>
 
 <!--                  <button v-else-if="state === 'afterChallengeRecieved'" v-on:click="verify()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">-->
@@ -300,6 +314,7 @@ import VerifiedAbi from "../../abis/socialclaim.json"
 import LinkAbi from "../../abis/link.json"
 import Notifications from "../../components/Notifications"
 import WalletNotifications from "../../components/WalletNotifications"
+import {copyText} from "vue3-clipboard"
 
 export default {
   setup() {
@@ -378,7 +393,7 @@ export default {
     this.socialClaimContract.on("ValidationUpdate", (addr, challenge) => {
       if (address.value === addr && challenge.toString() !== "0") {
         this.challenge = challenge.toString()
-        _self.state = 'afterChallengeRecieved'
+        _self.state = 'afterWalletCreated'
         _self.errorState = false
       }
     });
@@ -386,7 +401,7 @@ export default {
 
     this.socialClaimContract.on("WalletCreationUpdate", (addr) => {
       if (address.value === addr) {
-        alert('wallet creation started')
+        // alert('wallet creation started')
       }
     });
 
@@ -397,14 +412,15 @@ export default {
         id = `${id.substring(0, 8)}-${id.substring(8, 12)}-${id.substring(12, 16)}-${id.substring(16, 20)}-${id.substring(20)}`
         this.axios.get(`${this.socialClaimApiURL}/wallets/${id}`)
             .then(function (response) {
-              _self.wallet = response
+              _self.wallet = JSON.parse(response.data).result
+              _self.state = 'afterWalletCreated'
+              _self.loadWallets()
             })
             .catch(function () {
             }).then(function(){
         })
       }
     });
-
 
     this.socialClaimContract.on("VerificationResult", (addr, verified) => {
       if (address.value === addr) {
@@ -446,11 +462,11 @@ export default {
       _self.walletsLoading = true
       this.axios.get(this.socialClaimApiURL+'/wallets')
           .then(function (response) {
-            _self.wallets = response.result
-            console.log(response);
+            _self.wallets = JSON.parse(response.data).result
             _self.walletsErrorState = false
           })
-          .catch(function () {
+          .catch(function (error) {
+            console.log(error)
             _self.walletsErrorState = true
           }).then(function(){
             _self.walletsLoading = false
@@ -469,6 +485,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    doCopy(address) {
+      copyText(address)
     },
     verify() {
       let _self = this
