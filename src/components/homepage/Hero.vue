@@ -201,10 +201,10 @@
 
           <ul class="absolute w-full z-10 right-1 top-1 hidden text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
             <li class="w-full">
-              <a href="#" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-secondary dark:text-white" aria-current="page">Create a wallet</a>
+              <a href="#" @click="setTab(0)" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-secondary" aria-current="page"><span :class="tab === 0 ? 'text-white' : 'text-gray-400'">Create a wallet</span></a>
             </li>
             <li class="w-full relative">
-              <a href="#" class="inline-block p-4 w-full bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-secondary dark:hover:bg-gray-700">Claim a wallet</a>
+              <a href="#" @click="setTab(1)" class="inline-block p-4 w-full bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-secondary dark:hover:bg-gray-700"><span :class="tab === 1 ? 'text-white' : 'text-gray-400'">Claim wallet funds</span></a>
             </li>
           </ul>
         </div>
@@ -237,7 +237,7 @@
 
           <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>
 
-          <div class="flow-root" >
+          <div class="flow-root" v-if="tab === 0" >
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" >
               <li class="py-5" data-aos="zoom-in" >
                 <div class="flex items-center space-x-4">
@@ -246,11 +246,8 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
+                      <label class="text-xs text-white" for="twitter_element">Twitter URL to claim the wallet :</label>
                       <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
-                      <span v-if="twitter.url.length > 0">
-          <label class="text-xs text-secondary" for="twitter_element">Current valid twitter Bio HTML selector :</label>
-          <input disabled="disabled" :value="twitter.element" type="text" id="twitter_element" class="p-1 bg-gray-50 border border-gray-300 text-gray-500 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
-        </span>
                     </form>
                   </div>
                 </div>
@@ -300,6 +297,81 @@
               </li>
             </ul>
           </div>
+          <div class="flow-root" v-if="tab === 1" >
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" >
+              <li class="py-5" data-aos="zoom-in" >
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <form>
+                      <label class="text-xs text-white" for="twitter_element">Search for an existing wallet :</label>
+                      <vue3-simple-typeahead
+                          id="typeahead_id"
+                          class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Start writing..."
+                          :items="walletsURLs"
+                          :minInputLength="1"
+                          :itemProjection="itemProjectionFunction"
+                          @selectItem="selectItemEventHandler"
+                          @onInput="onInputEventHandler"
+                          @onFocus="onFocusEventHandler"
+                          @onBlur="onBlurEventHandler"
+                      >
+                      </vue3-simple-typeahead>
+                    </form>
+                  </div>
+                </div>
+                <div  class="mt-5">
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url, twitter.element)" type="button" class=" w-full text-white  hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-tertiary dark:hover:bg-secondary  dark:hover:ring-tertiary focus:outline-none dark:focus:ring-blue-800">
+                    <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2" />Claim wallet
+                  </button>
+
+                  <div v-if="selectedWallet">
+                    <div class="w-full relative h-24">
+                      <!--          <li class="w-full relative h-14">-->
+                      <div class="absolute right-0 top-1 mt-1 w-full h-full rounded-lg bg-secondarymedium"></div>
+                      <div class="absolute right-2 top-0 mt-1 w-full h-full rounded-lg bg-tertiary"></div>
+
+                      <div class=" absolute w-full h-20 mt-2 z-10 right-1 top-1 hidden text-lg font-medium  text-gray-500 rounded-lg divide-x divide-gray-200 shadow sm:flex  dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
+                        <img src="/images/logos/wallet.svg"  class=" pt-2 text-white block object-contain h-16" />
+                        <div class="flex items-center">
+                          <h5 class="ml-3 mr-3 text-xl  leading-none text-gray-900 dark:text-white">{{shortenAddress(selectedWallet.address)}}<br/>
+                            <span class="text-xs text-gray-300 font-light">{{ selectedWallet.balance.balance }} MATIC</span><br />
+                          </h5>
+                        </div>
+                        <div class="flex items-center">
+                          <h5 class="ml-3 text-xl  leading-none text-gray-900 dark:text-white">URL you own : <br />
+                            <a class="underline text-xs text-gray-300 font-light" :href="selectedWallet.description">{{selectedWallet.description}}</a><br/>
+                          </h5>
+
+                        </div>
+
+                        <!--                        <li class="w-full">-->
+                        <!--                          <a href="#" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-secondary dark:text-white" aria-current="page">Create a wallet</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="w-full relative">-->
+                        <!--                          <a href="#" class="inline-block p-4 w-full bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-secondary dark:hover:bg-gray-700">Claim a wallet</a>-->
+                        <!--                        </li>-->
+
+                      </div>
+                    </div>
+                    <div v-if="state === 'afterSelectWalletToClaim'">
+                      <form class="mt-5">
+                        <label class="text-xs text-white" >MATIC Wallet address to withdraw funds :</label>
+                        <input  type="text"  v-model="withdrawAddress" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0x0000...." required>
+                      </form>
+                    </div>
+                    <button v-on:click="withdraw()" type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
+                      <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Withdraw
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
@@ -443,10 +515,14 @@ export default {
       linkBalance: null,
       challenge: "",
       linkAmount: .2,
+      tab: 0,
       showGif: false,
       isActivated: false,
       wallet: null,
       wallets: [],
+      walletsURLs: [],
+      selectedWallet: null,
+      withdrawAddress: null,
       error: "unknown error, please try again",
       twitter: {url: "", element: "div#react-root div > div > div > div:nth-child(3) > div > div > span"},
       tiktok: {url: "", element: "h2[data-e2e='user-bio']"},
@@ -457,12 +533,32 @@ export default {
     toggleGif() {
       this.showGif = !this.showGif
     },
+    setTab(tab){
+      this.tab = tab
+    },
+    withdraw(){
+      alert(`Withdraw ${this.selectedWallet.balance.balance} MATIC from ${this.selectedWallet.address} to ${this.withdrawAddress}`)
+    },
+    selectItemEventHandler(item) {
+      const _self = this
+      const claimWallet = this.wallets.find(function(wallet){ return wallet.description === item})
+      this.axios.get(`${this.socialClaimApiURL}/wallets/${claimWallet.id}`)
+          .then(function (response) {
+            console.log(response)
+            _self.selectedWallet = JSON.parse(response.data).result
+          })
+          .catch(function () {
+          }).then(function(){
+      })
+    },
     loadWallets() {
       let _self = this
       _self.walletsLoading = true
       this.axios.get(this.socialClaimApiURL+'/wallets')
           .then(function (response) {
             _self.wallets = JSON.parse(response.data).result.slice().reverse()
+            _self.walletsURLs = _self.wallets.map(function(w) { return w.description })
+            _self.state = 'afterSelectWalletToClaim'
             _self.walletsErrorState = false
           })
           .catch(function (error) {
