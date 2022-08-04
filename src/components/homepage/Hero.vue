@@ -462,7 +462,7 @@ export default {
       _self.walletsLoading = true
       this.axios.get(this.socialClaimApiURL+'/wallets')
           .then(function (response) {
-            _self.wallets = JSON.parse(response.data).result
+            _self.wallets = JSON.parse(response.data).result.slice().reverse()
             _self.walletsErrorState = false
           })
           .catch(function (error) {
