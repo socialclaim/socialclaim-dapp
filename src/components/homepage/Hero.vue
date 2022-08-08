@@ -10,7 +10,7 @@
 }
 
 .vcpg[data-v-63943e43] .vcp__header {
-  background-color: #FFF;
+  background-color: #000b48ff;
   height: 46px;
   border-radius: 12px 12px 0 0;
   transition: background-color .3s ease
@@ -52,14 +52,14 @@
   align-items: center;
   flex: 1;
   font-weight: bold;
-  color: #ABABAB
+  color: #000b48ff
 }
 
 .vcp__header-icon[data-v-64321428] {
   display: flex;
   align-items: center;
   transition: transform .3s cubic-bezier(.5, .25, 0, 1);
-  color: #ABABAB
+  color: #000b48ff
 }
 
 .vcp--expanded .vcp__header-icon[data-v-64321428] {
@@ -90,6 +90,51 @@
 .slide-enter-from[data-v-64321428], .slide-leave-to[data-v-64321428] {
   opacity: .25
 }
+
+
+.simple-typeahead[data-v-0ccb6f26] {
+  position: relative;
+  width: 100%;
+}
+.simple-typeahead > input[data-v-0ccb6f26] {
+  margin-bottom: 0;
+}
+.simple-typeahead .simple-typeahead-list[data-v-0ccb6f26] {
+  position: absolute;
+  width: 100%;
+  border: none;
+  max-height: 400px;
+  overflow-y: auto;
+  border-bottom: 0.1rem solid #FFF;
+  z-index: 9;
+}
+.simple-typeahead .simple-typeahead-list .simple-typeahead-list-header[data-v-0ccb6f26] {
+  background-color: #fafafa;
+  padding: 0.6rem 1rem;
+  border-bottom: 0.1rem solid #FFF;
+  border-left: 0.1rem solid #FFF;
+  border-right: 0.1rem solid #FFF;
+}
+.simple-typeahead .simple-typeahead-list .simple-typeahead-list-footer[data-v-0ccb6f26] {
+  background-color: #fafafa;
+  padding: 0.6rem 1rem;
+  border-left: 0.1rem solid #FFF;
+  border-right: 0.1rem solid #FFF;
+}
+.simple-typeahead .simple-typeahead-list .simple-typeahead-list-item[data-v-0ccb6f26] {
+  cursor: pointer;
+  background-color: #000b48ff;
+  padding: 0.6rem 1rem;
+  border-bottom: 0.1rem solid #FFF;
+  border-left: 0.1rem solid #FFF;
+  border-right: 0.1rem solid #FFF;
+}
+.simple-typeahead .simple-typeahead-list .simple-typeahead-list-item[data-v-0ccb6f26]:last-child {
+  border-bottom: none;
+}
+.simple-typeahead .simple-typeahead-list .simple-typeahead-list-item.simple-typeahead-list-item-active[data-v-0ccb6f26] {
+  background-color: #000b48ff;
+}
 </style>
 <template>
   <section id="verify" >
@@ -101,11 +146,11 @@
         <h2 class="text-md  md:mt-5 md:text-xl">Link your BSC wallet to your social media profiles</h2>
       </div>
       <div v-if="isActivated" class="md:mt-20 relative cursor-pointer outline-none">
-          <div class="w-full relative h-80">
+          <div class="w-full relative h-80 ">
             <!--          <li class="w-full relative h-14">-->
             <div class="absolute right-0 top-1 w-full h-full rounded-lg bg-secondarymedium"></div>
             <div class="absolute right-2 top-0 w-full h-full rounded-lg bg-tertiary"></div>
-            <div class="absolute w-full h-full z-10 right-1 top-1 hidden text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow dark:bg-secondary sm:flex dark:divide-gray-700 dark:text-gray-400">
+            <div class="absolute overflow-y-scroll w-full h-full z-10 right-1 top-1 hidden text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow dark:bg-secondary sm:flex dark:divide-gray-700 dark:text-gray-400">
 
               <div class="w-full relative shadow-md sm:rounded-lg">
                <div  class="text-white p-4 ">Latest wallets up for grabs</div>
@@ -118,7 +163,7 @@
                   </svg>
                 </div>
 
-                <table v-if="!walletsErrorState && !walletsLoading" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table v-if="!walletsErrorState && !walletsLoading" class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-secondary dark:text-secondarymedium">
                   <tr>
                     <th scope="col" class="py-3 px-3">
@@ -235,24 +280,23 @@
             </div>
           </div>
 
-          <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>
 
           <div class="flow-root" v-if="tab === 0" >
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" >
-              <li class="py-5" data-aos="zoom-in" >
+              <li class="pb-4" data-aos="zoom-in" >
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
                     <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <label class="text-xs text-white" for="twitter_element">Twitter URL to claim the wallet :</label>
-                      <input :disabled="!isActivated || tiktok.url.length > 0 || twitch.url.length > 0" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
+                      <label class="text-xs text-white" >Twitter URL to claim the wallet :</label>
+                      <input :disabled="!isActivated" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
                     </form>
                   </div>
                 </div>
                 <div v-if="twitter.url.length > 0" class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url, twitter.element)" type="button" class=" w-full text-white  hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-tertiary dark:hover:bg-secondary  dark:hover:ring-tertiary focus:outline-none dark:focus:ring-blue-800">
+                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url)" type="button" class=" w-full text-white  hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-tertiary dark:hover:bg-secondary  dark:hover:ring-tertiary focus:outline-none dark:focus:ring-blue-800">
                     <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2" />Request wallet creation
                   </button>
 
@@ -299,7 +343,7 @@
           </div>
           <div class="flow-root" v-if="tab === 1" >
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" >
-              <li class="py-5" data-aos="zoom-in" >
+              <li class="pb-4" data-aos="zoom-in" >
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
                     <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">
@@ -324,10 +368,6 @@
                   </div>
                 </div>
                 <div  class="mt-5">
-                  <button v-if="state === 'init' || state === 'verificationSuccessful' || state === 'VerificationError'" v-on:click="requestWalletCreation(twitter.url, twitter.element)" type="button" class=" w-full text-white  hover:bg-secondary focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mr-2 mb-2 dark:bg-tertiary dark:hover:bg-secondary  dark:hover:ring-tertiary focus:outline-none dark:focus:ring-blue-800">
-                    <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2" />Claim wallet
-                  </button>
-
                   <div v-if="selectedWallet">
                     <div class="w-full relative h-24">
                       <!--          <li class="w-full relative h-14">-->
@@ -357,20 +397,28 @@
 
                       </div>
                     </div>
-                    <div v-if="state === 'afterSelectWalletToClaim'">
+                    <div v-if="selectedWallet">
                       <form class="mt-5">
                         <label class="text-xs text-white" >MATIC Wallet address to withdraw funds :</label>
                         <input  type="text"  v-model="withdrawAddress" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0x0000...." required>
                       </form>
                     </div>
-                    <button v-on:click="withdraw()" type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
+                    {{ state }}
+                    <button v-if="state !== 'afterChallengeRecieved'" v-on:click="requestWithdrawal()" type="button" class=" mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
+                      <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Request Withdrawal
+                    </button>
+                    <button v-if="state === 'afterChallengeRecieved'" v-on:click="withdraw()" type="button" class=" mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
                       <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Withdraw
+                    </button>
+                    <button  disabled="disabled" type="button" class="mt-2 cursor-default w-full text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-400   focus:outline-none ">
+                      <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Claim wallet (coming soon)
                     </button>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
+          <Notifications :state="state" :errorState="errorState" :challenge="challenge" :error="error"/>
 
         </div>
       </div>
@@ -462,10 +510,10 @@ export default {
       }
     });
 
-    this.socialClaimContract.on("ValidationUpdate", (addr, challenge) => {
+    this.socialClaimContract.on("WithdrawalUpdate", (addr, challenge) => {
       if (address.value === addr && challenge.toString() !== "0") {
         this.challenge = challenge.toString()
-        _self.state = 'afterWalletCreated'
+        _self.state = 'afterChallengeRecieved'
         _self.errorState = false
       }
     });
@@ -473,7 +521,7 @@ export default {
 
     this.socialClaimContract.on("WalletCreationUpdate", (addr) => {
       if (address.value === addr) {
-        // alert('wallet creation started')
+        _self.state = 'afterWalletCreationRequest'
       }
     });
 
@@ -483,7 +531,7 @@ export default {
         let id = ethers.utils.toUtf8String(walletAddress);
         id = `${id.substring(0, 8)}-${id.substring(8, 12)}-${id.substring(12, 16)}-${id.substring(16, 20)}-${id.substring(20)}`
         this.axios.get(`${this.socialClaimApiURL}/wallets/${id}`)
-            .then(function (response) {
+            .then(function (response) {WalletCreated
               _self.wallet = JSON.parse(response.data).result
               _self.state = 'afterWalletCreated'
               _self.loadWallets()
@@ -494,17 +542,17 @@ export default {
       }
     });
 
-    this.socialClaimContract.on("VerificationResult", (addr, verified) => {
-      if (address.value === addr) {
-        _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
-        _self.twitter.url = ''
-        _self.tiktok.url = ''
-        _self.twitch.url = ''
-        _self.errorState = false
-        _self.challenge = ''
-        _self.linkAmount = null
-      }
-    });
+    // this.socialClaimContract.on("VerificationResult", (addr, verified) => {
+    //   if (address.value === addr) {
+    //     _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
+    //     _self.twitter.url = ''
+    //     _self.tiktok.url = ''
+    //     _self.twitch.url = ''
+    //     _self.errorState = false
+    //     _self.challenge = ''
+    //     _self.linkAmount = null
+    //   }
+    // });
   },
   data() {
     return {
@@ -524,9 +572,7 @@ export default {
       selectedWallet: null,
       withdrawAddress: null,
       error: "unknown error, please try again",
-      twitter: {url: "", element: "div#react-root div > div > div > div:nth-child(3) > div > div > span"},
-      tiktok: {url: "", element: "h2[data-e2e='user-bio']"},
-      twitch: {url: "", element: "div[data-a-target='about-panel']"}
+      twitter: {url: ""}
     };
   },
   methods: {
@@ -535,9 +581,41 @@ export default {
     },
     setTab(tab){
       this.tab = tab
+      this.state = 'init'
     },
-    withdraw(){
-      alert(`Withdraw ${this.selectedWallet.balance.balance} MATIC from ${this.selectedWallet.address} to ${this.withdrawAddress}`)
+    requestWithdrawal(){
+      let _self = this
+      let id = this.selectedWallet.id.replace(/-/g,'')
+
+      console.log(id)
+      id = ethers.utils.toUtf8Bytes(id);
+      try {
+        const { signer } = useEthers()
+        this.socialClaimContract.connect(signer.value).requestWithdrawal(id).then(function(){
+          _self.state = 'afterWithdrawalRequest'
+        }, function(error) {
+          console.log(error)
+          _self.error = error.data.message
+          _self.errorState = true
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    withdraw() {
+      let _self = this
+      try {
+        const { signer } = useEthers()
+        this.socialClaimContract.connect(signer.value).withdraw(_self.withdrawAddress).then(function(){
+          _self.state = 'afterWithdraw'
+        }, function(error) {
+          console.log(error)
+          _self.error = error.data.message
+          _self.errorState = true
+        })
+      } catch (error) {
+        console.log(error)
+      }
     },
     selectItemEventHandler(item) {
       const _self = this
@@ -558,7 +636,8 @@ export default {
           .then(function (response) {
             _self.wallets = JSON.parse(response.data).result.slice().reverse()
             _self.walletsURLs = _self.wallets.map(function(w) { return w.description })
-            _self.state = 'afterSelectWalletToClaim'
+            if (_self.tab === 1)
+              _self.state = 'afterSelectWalletToClaim'
             _self.walletsErrorState = false
           })
           .catch(function (error) {
@@ -568,12 +647,12 @@ export default {
             _self.walletsLoading = false
           })
     },
-    requestWalletCreation(url, path) {
+    requestWalletCreation(url) {
       let _self = this
       try {
         const { signer } = useEthers()
-        this.socialClaimContract.connect(signer.value).requestWalletCreation(url, path).then(function(){
-          _self.state = 'afterVerificationRequest'
+        this.socialClaimContract.connect(signer.value).requestWalletCreation(url).then(function(){
+          _self.state = 'afterWalletCreationRequest'
         }, function(error) {
           _self.error = error.data.message
           _self.errorState = true
@@ -584,21 +663,6 @@ export default {
     },
     doCopy(address) {
       copyText(address)
-    },
-    verify() {
-      let _self = this
-      try {
-        const { signer } = useEthers()
-        this.socialClaimContract.connect(signer.value).verify().then(function(){
-          _self.state = 'afterManualVerification'
-        }, function(error) {
-          _self.error = error.data.message
-          console.log(_self.error)
-          _self.errorState = true
-        })
-      } catch (error) {
-        console.log(error)
-      }
     },
     transfer() {
       try {

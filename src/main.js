@@ -9,7 +9,6 @@ import VueCollapsiblePanel from '@dafcoe/vue-collapsible-panel'
 import '@dafcoe/vue-collapsible-panel/dist/vue-collapsible-panel.css'
 import VueClipboard from 'vue3-clipboard'
 import SimpleTypeahead from 'vue3-simple-typeahead';
-import 'vue3-simple-typeahead/dist/vue3-simple-typeahead.css';
 
 const head = createHead()
 import './index.css'
