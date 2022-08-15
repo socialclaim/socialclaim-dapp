@@ -1,12 +1,10 @@
-<img src="https://svgur.com/i/jYf.svg" width="100"/>
-
-# SocialClaim dapp
+<img src="https://svgur.com/i/jYf.svg" width="200"/>
 
 ## Live version
 [socialclaim.nescrypto.com](https://socialclaim.nescrypto.com)
 
 ## How to use video
-https://www.youtube.com/watch?v=WsTZ4JY_df4&feature=youtu.be
+#TODO
 
 ## Project setup
 ```shell

@@ -242,12 +242,12 @@
                   <tbody>
                   <tr v-bind:key="wallet.id" class="bg-white border-b dark:bg-secondary dark:border-gray-700" v-for="wallet in wallets">
                     <th scope="row" class="py-2 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ wallet.description }}</a><br/>
-                      <a @click="selectWalletToClaim(wallet)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Claim</a>
+                      <a href="#" class=" text-blue-600 dark:text-white hover:underline">{{ wallet.description }}</a><br/>
+                      <a @click="selectWalletToClaim(wallet)" class="rounded-md border-white border px-1 mt-1 inline-block border-secondarymedium font-medium text-secondarymedium hover:underline">Claim</a>
                     </th>
-                    <td class="py-2 pl-2 text-sm ">
-                      <h5 class="font-medium  leading-none text-gray-900 dark:text-white">Address:{{shortenAddress(wallet.address)}} <a class=" underline text-tertiary " @click="doCopy(wallet.address)">Copy </a> <br/>
-                        <span class="text-gray-300 text-md">{{ wallet.balance.balance }} MATIC</span>
+                    <td class="py-2 px-2 text-sm ">
+                      <h5 class="font-medium  leading-none text-gray-900 dark:text-gray-100">Address: {{shortenAddress(wallet.address)}} <a class=" underline text-tertiary " @click="doCopy(wallet.address)"><br />Copy </a> <br/>
+                        <span class="mt-1 inline-block text-white text-md">{{ wallet.balance.balance }} MATIC</span>
                       </h5>
                     </td>
                   </tr>
@@ -373,12 +373,27 @@
               <li class="pb-4" data-aos="zoom-in" >
                 <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
+                    <span v-if="!walletLoading">
                     <img class="w-12 h-12" src="/images/twitter.svg" alt="Neil image">
+                    </span>
+                    <span v-else >
+                      <svg  class="inline-block w-10 h-8 mr-2 text-gray-100 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#1C64F2"/>
+                      </svg>
+                    </span>
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <label class="text-xs text-white" for="twitter_element">Search for an existing wallet :</label>
+                      <label class="text-xs text-white align-middle" >Search for an existing wallet <!-- Dark style tooltip -->
+                        <span @mouseover="toggleTooltip(1, true)" @mouseleave="toggleTooltip(1, false)" data-tooltip-target="tooltip-bottom"><img class="w-3 inline-block" src="/images/question-circle.svg"></span>
+                        <span v-if="tooltips[1]" id="tooltip-dark" role="tooltip" class="absolute z-50 py-2 px-3 text-sm font-medium text-white bg-secondary border border-white rounded-lg shadow-sm  tooltip ">
+                          <span class="text-white">A twitter URL you own that has a wallet linked to it</span>
+                          <div class="tooltip-arrow" data-popper-arrow></div>
+                        </span>
+                      </label>
                       <vue3-simple-typeahead
+                          :disabled="wallets.length == 0"
                           id="typeahead_id"
                           class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Start writing..."
@@ -394,15 +409,16 @@
                     </form>
                   </div>
                 </div>
-                <div  class="mt-5">
-                  <div v-if="selectedWallet">
+                <div class="mt-5" v-if="selectedWallet && !walletLoading">
+
+                  <div >
                     <div class="w-full relative h-24">
                       <!--          <li class="w-full relative h-14">-->
                       <div class="absolute right-0 top-1 mt-1 w-full h-full rounded-lg bg-secondarymedium"></div>
                       <div class="absolute right-2 top-0 mt-1 w-full h-full rounded-lg bg-tertiary"></div>
 
                       <div class=" absolute w-full h-20 mt-2 z-10 right-1 top-1  text-lg font-medium  text-gray-500 rounded-lg  shadow   dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
-                      <div class="w-full divide-x divide-gray-200 flex">
+                      <div class="w-full divide-x divide-tertiary flex h-full">
                         <img src="/images/logos/wallet.svg"  class=" pt-2 text-white block object-contain h-16" />
                         <div class="flex items-center">
                           <h5 class="ml-3 mr-3 text-xl  leading-none text-gray-900 dark:text-white">{{shortenAddress(selectedWallet.address)}}<br/>
@@ -428,20 +444,40 @@
                       </div>
                     </div>
                     <div v-if="transactions.length > 0" class="text-white mt-5">
-                      Withdrawals history for this wallet :
+                      Withdrawals history for this wallet <span class="text-xs text-white align-middle" > <!-- Dark style tooltip -->
+                      <span @mouseover="toggleTooltip(2, true)" @mouseleave="toggleTooltip(2, false)" data-tooltip-target="tooltip-bottom"><img class="w-4 inline-block" src="/images/question-circle.svg"></span>
+                      <span v-if="tooltips[2]" id="tooltip-dark" role="tooltip" class="absolute z-50 py-2 px-3 text-sm font-medium text-white bg-secondary border border-white rounded-lg shadow-sm  tooltip ">
+                          <span class="text-white">The transactions that were previously executed to withdraw from the wallet</span>
+                          <div class="tooltip-arrow" data-popper-arrow></div>
+                        </span> :
+                    </span>
                       <div class="overflow-x-scroll">
                         <a v-bind:key="transaction.transactionId" class="text-md " v-for="transaction in transactions" :href="'https://mumbai.polygonscan.com/tx/'+ transaction.transactionId"><span class="mr-2" v-if="transaction.status == 'SUCCEEDED'">✅</span><span v-else class="mr-2">⌛️</span><span class="underline">{{(transaction.transactionId)}}</span></a>
                       </div>
                     </div>
-                    <div v-if="selectedWallet">
+                    <div >
                       <form class="mt-5">
-                        <label class="text-xs text-white" >MATIC Wallet address to withdraw funds :</label>
+                        <div  class="text-gray-500 mt-4 italic text-xs"> Transaction fees are currently fixed at 100 GWEI and Gas Limit</div>
+                        <label class="text-xs text-white align-middle" >MATIC Wallet address to withdraw funds <!-- Dark style tooltip -->
+                          <span @mouseover="toggleTooltip(3, true)" @mouseleave="toggleTooltip(3, false)" data-tooltip-target="tooltip-bottom"><img class="w-3 inline-block" src="/images/question-circle.svg"></span>
+                          <span v-if="tooltips[3]" id="tooltip-dark" role="tooltip" class="absolute z-50 py-2 px-3 text-sm font-medium text-white bg-secondary border border-white rounded-lg shadow-sm  tooltip ">
+                          <span class="text-white">⚠️ Make sure the address is well formatted and valid.<br />The provided address is your current address</span>
+                          <div class="tooltip-arrow" data-popper-arrow></div>
+                        </span> :
+                        </label>
                         <input  type="text"  v-model="withdrawAddress" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0x0000...." required>
                       </form>
                     </div>
-                    <button v-if="state !== 'afterChallengeRecieved'" v-on:click="requestWithdrawal()" type="button" class=" mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
-                      <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Request Withdrawal
-                    </button>
+                    <div v-if=" selectedWallet.state !== 'afterChallengeRecieved'">
+                      <button v-if="selectedWallet && selectedWallet.balance.balance > 0" v-on:click="requestWithdrawal()" type="button" class=" mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
+                        <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />
+                        Request Withdrawal
+                      </button>
+                      <button type="button" class="mt-2 cursor-default w-full text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-400   focus:outline-none " v-else>
+                        <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />
+                        Cannot request withdrawal - wallet is empty
+                      </button>
+                    </div>
                     <button v-if="state === 'afterChallengeRecieved'" v-on:click="withdraw()" type="button" class=" mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
                       <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Withdraw
                     </button>
@@ -607,12 +643,14 @@ export default {
       withdrawAddress: null,
       error: "unknown error, please try again",
       twitter: {url: ""},
-      tooltips: [false,false,false,false,false]
+      tooltips: [false,false,false,false,false],
+      walletLoading: false
     };
   },
   methods: {
     selectWalletToClaim(item) {
       const _self = this
+      this.walletLoading = true
       const claimWallet = this.wallets.find(function(wallet){ return wallet.id === item.id})
       this.axios.get(`${this.socialClaimApiURL}/wallets/${claimWallet.id}`)
           .then(function (response) {
@@ -621,6 +659,7 @@ export default {
           })
           .catch(function () {
           }).then(function(){
+        _self.walletLoading = false
       })
     },
     toggleTooltip(index, show) {
@@ -688,13 +727,17 @@ export default {
     selectItemEventHandler(item) {
       const _self = this
       const claimWallet = this.wallets.find(function(wallet){ return wallet.id === item.id})
+      this.walletLoading = true
       this.axios.get(`${this.socialClaimApiURL}/wallets/${claimWallet.id}`)
           .then(function (response) {
             _self.selectedWallet = JSON.parse(response.data).result
-            _self.refreshTransactions()
+            _self.refreshTransactions().then().catch().then(function(){
+              _self.walletLoading = false
+            })
           })
           .catch(function () {
           }).then(function(){
+        _self.walletLoading = false
       })
     },
     loadWallets() {
