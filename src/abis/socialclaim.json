@@ -251,7 +251,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "withdrawalAddress",
+        "name": "recipient",
         "type": "address"
       }
     ],
@@ -271,12 +271,12 @@
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
+        "internalType": "uint256",
         "name": "status",
-        "type": "bytes32"
+        "type": "uint256"
       }
     ],
-    "name": "WithdrawalAttempted",
+    "name": "WithdrawalResult",
     "type": "event"
   },
   {
@@ -297,6 +297,25 @@
     ],
     "name": "WithdrawalUpdate",
     "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_bytes32",
+        "type": "bytes32"
+      }
+    ],
+    "name": "bytes32ToString",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
   },
   {
     "inputs": [],

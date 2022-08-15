@@ -3,29 +3,38 @@
 .vcpg[data-v-63943e43] {
   width: 100%;
   border-radius: 12px 12px 0 0;
+  border: 0;
 }
 
 .vcpg[data-v-63943e43] .vcp * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 .vcpg[data-v-63943e43] .vcp__header {
   background-color: #000b48ff;
   height: 46px;
-  border-radius: 12px 12px 0 0;
-  transition: background-color .3s ease
+  transition: background-color .3s ease;
+  border: 0;
+  border-radius: 8px 8px 0 0 ;
 }
 
 .vcpg[data-v-63943e43] .vcp__header:hover {
-  background-color: #FFF
+  background-color: #ff9719ff
 }
 
 .vcpg[data-v-63943e43] .vcp__header:active {
-  background-color: var(--bg-color-header-active)
+  background-color: #ff9719ff
 }
 
 .vcpg[data-v-63943e43] .vcp:not(:first-of-type) .vcp__header {
+  border-radius: 0;
+}
+.vcpg[data-v-63943e43] .vcp:last-of-type .vcp__header {
+  border-radius: 0 0 8px 8px;
+}
 
+.vcpg[data-v-63943e43] .vcp:last-of-type .vcp__header:active {
+  border-radius: 0;
 }
 
 .vcpg[data-v-63943e43] .vcp__header-title {
@@ -39,12 +48,12 @@
 .vcp__header[data-v-64321428] {
   display: flex;
   padding: 12px;
-  pointer-events: none
+  pointer-events: none;
 }
 
 .vcp--expandable .vcp__header[data-v-64321428] {
   pointer-events: auto;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .vcp__header-title[data-v-64321428] {
@@ -52,14 +61,14 @@
   align-items: center;
   flex: 1;
   font-weight: bold;
-  color: #000b48ff
+  color: #FFF
 }
 
 .vcp__header-icon[data-v-64321428] {
   display: flex;
   align-items: center;
   transition: transform .3s cubic-bezier(.5, .25, 0, 1);
-  color: #000b48ff
+  color: #FFF
 }
 
 .vcp--expanded .vcp__header-icon[data-v-64321428] {
@@ -84,6 +93,7 @@
 }
 
 .vcp__body-content[data-v-64321428] {
+  background-color: #000b48ff;
   padding: 12px
 }
 
@@ -95,6 +105,7 @@
 .simple-typeahead[data-v-0ccb6f26] {
   position: relative;
   width: 100%;
+  z-index: 30;
 }
 .simple-typeahead > input[data-v-0ccb6f26] {
   margin-bottom: 0;
@@ -105,7 +116,7 @@
   border: none;
   max-height: 400px;
   overflow-y: auto;
-  border-bottom: 0.1rem solid #FFF;
+
   z-index: 9;
 }
 .simple-typeahead .simple-typeahead-list .simple-typeahead-list-header[data-v-0ccb6f26] {
@@ -140,12 +151,66 @@
   <section id="verify" >
     <div class=" text-white grid grid-cols-1 md:grid-cols-2 px-4  pb-20 gap-6 mx-auto max-w-screen-lg">
       <div class="mt-12" v-if="!isActivated">
-        <div class="font-bold leading-relaxed mt-16 lg:text-5xl ">
-          Let the Crypto 🌎<br /> know you are the <span class="text-secondary underline">right</span> person
+        <div class="font-bold leading-relaxed mt-14 lg:text-5xl ">
+          We empower ✊ people to <span class="text-secondary">fundraise</span> for <span class=" text-secondarymedium underline">charities</span> and individuals
         </div>
-        <h2 class="text-md  md:mt-5 md:text-xl">Link your BSC wallet to your social media profiles</h2>
+        <h2 class="text-md md:text-2xl">> Trusted, secure and decentralised</h2>
       </div>
-      <div v-if="isActivated" class="md:mt-20 relative cursor-pointer outline-none">
+      <div v-if="isActivated">
+      <div   class="md:mt-20 rounded-lg">
+        <div class="w-full relative">
+          <vue-collapsible-panel-group accordion>
+            <vue-collapsible-panel :expanded="false">
+              <template #title >
+                🏁 Getting started
+              </template>
+              <template #content>
+                <ul class="list-disc pl-6 text-md">
+                  <li class="mt-3">Install MetaMask and add the <a class="underline text-tertiary" target="_blank" href="https://chainlist.org/chain/80001">Polygon Mumbai test network</a></li>
+                  <li class="mt-3">
+                    Request Test <span class="text-tertiary">$MATIC</span> <a target="_blank" class="underline text-tertiary" href="https://mumbaifaucet.com/">Here</a>
+                    and <span class="text-tertiary">$LINK</span> <a target="_blank" class="underline text-tertiary" href="https://faucets.chain.link/mumbai">Here</a>
+                  </li>
+                  <li  class="mt-3">Make sure your  <span class="text-tertiary ">$LINK </span> is <a target="_blank" class="underline text-tertiary" href="https://consensys.net/blog/metamask/how-to-add-your-custom-tokens-in-metamask/"> displayed in MetaMask</a></li>
+                </ul>
+              </template>
+            </vue-collapsible-panel>
+            <vue-collapsible-panel :expanded="false">
+              <template #title>
+                🤍 I want to fundraise
+              </template>
+              <template #content>
+                <ul class="list-disc pl-6 text-md">
+                  <li class="mt-3">Use the transfer button to send us some <span class="text-tertiary ">$LINK </span> so we can request wallet creation for you. </li>
+                  <li  class="mt-3">Cost is : <span class="text-tertiary ">0.1 $LINK</span> per wallet creation</li>
+                  <li  class="mt-3">Provide the twitter URL of the person you want to raise funds for *</li>
+                  <li  class="mt-3">Click the <span class="text-tertiary ">Request wallet creation</span> button</li>
+                  <li  class="mt-3">Make sure to save the <span class="text-tertiary ">Wallet details</span> after creation</li>
+                </ul>
+                <div  class="ml-2  text-gray-500 mt-4 italic text-xs"> * More social media proivders will be added in the future</div>
+              </template>
+            </vue-collapsible-panel>
+            <vue-collapsible-panel :expanded="false">
+              <template #title >
+                🤲 I want to claim funds on a previously created wallet
+              </template>
+              <template #content>
+                <ul class="list-disc pl-6 text-md align-middle">
+
+                  <li class="mt-3">Use the transfer button to send us some <span class="text-tertiary ">$LINK </span> so we can request wallet creation for you. (<span class="text-tertiary ">0.1 $LINK</span> per withdrawal request and <span class="text-tertiary ">0.1 $LINK</span> to claim the wallet) </li>
+                  <li  class="mt-3">Provide a twitter URL that you own</li>
+                  <li  class="mt-3">(Optional) Provide a custom address to claim the funds (your current metamask address is provided as default)</li>
+                  <li  class="mt-3">Click the <span class="text-tertiary ">Request Withdrawal</span> button and wait for the challenge to be displayed</li>
+                  <li  class="mt-3">Copy the challenge in your Twitter Bio<a class=" cursor-pointer"  @click="toggleGif()"><img class=" ml-2 w-4 inline-block" src="/images/question-circle.svg">️</a> <img class="mt-2" v-show="showGif" src="/images/demo.gif" /></li>
+                  <li  class="mt-3">Click <span class="text-tertiary ">Withdraw</span></li>
+                </ul>
+              </template>
+            </vue-collapsible-panel>
+          </vue-collapsible-panel-group>
+        </div>
+      </div>
+
+      <div class="md:mt-6 relative cursor-pointer outline-none">
           <div class="w-full relative h-80 ">
             <!--          <li class="w-full relative h-14">-->
             <div class="absolute right-0 top-1 w-full h-full rounded-lg bg-secondarymedium"></div>
@@ -178,7 +243,7 @@
                   <tr v-bind:key="wallet.id" class="bg-white border-b dark:bg-secondary dark:border-gray-700" v-for="wallet in wallets">
                     <th scope="row" class="py-2 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ wallet.description }}</a><br/>
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Claim</a>
+                      <a @click="selectWalletToClaim(wallet)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Claim</a>
                     </th>
                     <td class="py-2 pl-2 text-sm ">
                       <h5 class="font-medium  leading-none text-gray-900 dark:text-white">Address:{{shortenAddress(wallet.address)}} <a class=" underline text-tertiary " @click="doCopy(wallet.address)">Copy </a> <br/>
@@ -192,51 +257,7 @@
 
             </div>
           </div>
-<!--        <vue-collapsible-panel-group class="rounded-lg border shadow-md dark:bg-gray-800 dark:border-gray-700" accordion>-->
-<!--          <vue-collapsible-panel>-->
-<!--            <template #title >-->
-<!--              Setup-->
-<!--            </template>-->
-<!--            <template #content>-->
-<!--              <ul class="list-disc pl-6 text-md">-->
-<!--                <li class="mt-3">Install MetaMask and add the <a class="underline text-yellow-600" target="_blank" href="https://chainlist.org/chain/80001">Binance Smart Chain test network</a></li>-->
-<!--                <li class="mt-3">-->
-<!--                  Request Test <span class="text-yellow-600">$BNB</span> <a target="_blank" class="underline text-yellow-600" href="https://testnet.binance.org/faucet-smart">Here</a>-->
-<!--                  and <span class="text-secondary ">$LINK</span> <a target="_blank" class="underline text-secondary" href="https://faucets.chain.link/chapel">Here</a>-->
-<!--                </li>-->
-<!--                <li  class="mt-3">Make sure your  <span class="text-secondary ">$LINK </span> is <a target="_blank" class="underline text-secondary" href="https://consensys.net/blog/metamask/how-to-add-your-custom-tokens-in-metamask/"> displayed in MetaMask</a></li>-->
-<!--              </ul>-->
-<!--            </template>-->
-<!--          </vue-collapsible-panel>-->
-<!--          <vue-collapsible-panel :expanded="false">-->
-<!--            <template #title>-->
-<!--              Step 1 : Transfer-->
-<!--            </template>-->
-<!--            <template #content>-->
-<!--              <ul class="list-disc pl-6 text-md">-->
-<!--                <li class="mt-3">Use the transfer button to send us some <span class="text-secondary ">$LINK </span> so we can request data for you. </li>-->
-<!--                <li  class="mt-3">Cost is : <span class="text-secondary ">0.1 $LINK</span> to initiate the verification and <span class="text-secondary ">0.1 $LINK</span> per verification attempt</li>-->
-<!--              </ul>-->
-<!--            </template>-->
-<!--          </vue-collapsible-panel>-->
-<!--          <vue-collapsible-panel :expanded="false">-->
-<!--            <template #title >-->
-<!--              Step 2 : Start the verification process-->
-<!--            </template>-->
-<!--            <template #content>-->
-<!--              <ul class="list-disc pl-6 text-md">-->
-<!--                <li class="mt-3">Enter the URL you want to verify</li>-->
-<!--                <li  class="mt-3">Click <span class="text-secondary ">Start Verification</span> and wait for the challenge to be displayed</li>-->
-<!--                <li  class="mt-3">Copy the challenge in the Bio of the social media you selected <a class=" cursor-pointer"  @click="toggleGif()">ℹ️</a>-->
-<!--                  <img v-show="showGif" src="/images/demo.gif" />-->
-<!--                </li>-->
-<!--                <li  class="mt-3">Click <span class="text-secondary ">Verify</span></li>-->
-<!--              </ul>-->
-<!--            </template>-->
-<!--          </vue-collapsible-panel>-->
-<!--        </vue-collapsible-panel-group>-->
-<!--        <div class="mt-4" v-if="state==='init'"></div>-->
-<!--        <div class="mt-28"  v-else></div>-->
+      </div>
       </div>
       <div class="md:mt-20 relative cursor-pointer outline-none">
         <div class="w-full relative h-16">
@@ -290,7 +311,13 @@
                   </div>
                   <div class="flex-1 min-w-0">
                     <form>
-                      <label class="text-xs text-white" >Twitter URL to claim the wallet :</label>
+                      <label class="text-xs text-white align-middle" >Twitter URL to claim the wallet <!-- Dark style tooltip -->
+                        <span @mouseover="toggleTooltip(0, true)" @mouseleave="toggleTooltip(0, false)" data-tooltip-target="tooltip-bottom"><img class="w-3 inline-block" src="/images/question-circle.svg"></span>
+                        <span v-if="tooltips[0]" id="tooltip-dark" role="tooltip" class="absolute z-50 py-2 px-3 text-sm font-medium text-white bg-secondary border border-white rounded-lg shadow-sm  tooltip ">
+                          <span class="text-white">The twitter URL of the person you wish to raise funds for</span>
+                          <div class="tooltip-arrow" data-popper-arrow></div>
+                        </span> :
+                      </label>
                       <input :disabled="!isActivated" type="text" id="twitter" v-model="twitter.url" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://twitter.com/username" required>
                     </form>
                   </div>
@@ -355,7 +382,7 @@
                           id="typeahead_id"
                           class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Start writing..."
-                          :items="walletsURLs"
+                          :items="wallets"
                           :minInputLength="1"
                           :itemProjection="itemProjectionFunction"
                           @selectItem="selectItemEventHandler"
@@ -374,7 +401,8 @@
                       <div class="absolute right-0 top-1 mt-1 w-full h-full rounded-lg bg-secondarymedium"></div>
                       <div class="absolute right-2 top-0 mt-1 w-full h-full rounded-lg bg-tertiary"></div>
 
-                      <div class=" absolute w-full h-20 mt-2 z-10 right-1 top-1 hidden text-lg font-medium  text-gray-500 rounded-lg divide-x divide-gray-200 shadow sm:flex  dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
+                      <div class=" absolute w-full h-20 mt-2 z-10 right-1 top-1  text-lg font-medium  text-gray-500 rounded-lg  shadow   dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
+                      <div class="w-full divide-x divide-gray-200 flex">
                         <img src="/images/logos/wallet.svg"  class=" pt-2 text-white block object-contain h-16" />
                         <div class="flex items-center">
                           <h5 class="ml-3 mr-3 text-xl  leading-none text-gray-900 dark:text-white">{{shortenAddress(selectedWallet.address)}}<br/>
@@ -387,6 +415,8 @@
                           </h5>
 
                         </div>
+                      </div>
+
 
                         <!--                        <li class="w-full">-->
                         <!--                          <a href="#" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-secondary dark:text-white" aria-current="page">Create a wallet</a>-->
@@ -397,13 +427,18 @@
 
                       </div>
                     </div>
+                    <div v-if="transactions.length > 0" class="text-white mt-5">
+                      Withdrawals history for this wallet :
+                      <div class="overflow-x-scroll">
+                        <a v-bind:key="transaction.transactionId" class="text-md " v-for="transaction in transactions" :href="'https://mumbai.polygonscan.com/tx/'+ transaction.transactionId"><span class="mr-2" v-if="transaction.status == 'SUCCEEDED'">✅</span><span v-else class="mr-2">⌛️</span><span class="underline">{{(transaction.transactionId)}}</span></a>
+                      </div>
+                    </div>
                     <div v-if="selectedWallet">
                       <form class="mt-5">
                         <label class="text-xs text-white" >MATIC Wallet address to withdraw funds :</label>
                         <input  type="text"  v-model="withdrawAddress" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0x0000...." required>
                       </form>
                     </div>
-                    {{ state }}
                     <button v-if="state !== 'afterChallengeRecieved'" v-on:click="requestWithdrawal()" type="button" class=" mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-tertiary dark:hover:text-black dark:hover:bg-secondarymedium focus:outline-none dark:focus:ring-blue-800">
                       <img  src="/images/createclaim.svg"  class="inline-block object-contain h-4 mr-2 " />Request Withdrawal
                     </button>
@@ -492,6 +527,7 @@ export default {
       if (provider.network.chainId.toString() === this.requiredChainId) {
         this.isActivated = true
         this.loadWallets()
+        this.withdrawAddress = address
       }
       else
         alert(`Please re-connect using the Polygon Mumbai Testnet (ID: ${this.requiredChainId})`)
@@ -525,13 +561,23 @@ export default {
       }
     });
 
+    this.socialClaimContract.on("WithdrawalResult", (addr, result) => {
+      if (address.value === addr) {
+        if (result === 1) {
+          this.refreshTransactions()
+          _self.state = 'afterWithdrawalSuccessful'
+        } else
+          _self.state = 'afterWithdrawalError'
+      }
+    });
+
     this.socialClaimContract.on("WalletCreated", (addr, walletAddress) => {
       const _self = this
       if (address.value === addr) {
         let id = ethers.utils.toUtf8String(walletAddress);
         id = `${id.substring(0, 8)}-${id.substring(8, 12)}-${id.substring(12, 16)}-${id.substring(16, 20)}-${id.substring(20)}`
         this.axios.get(`${this.socialClaimApiURL}/wallets/${id}`)
-            .then(function (response) {WalletCreated
+            .then(function (response) {
               _self.wallet = JSON.parse(response.data).result
               _self.state = 'afterWalletCreated'
               _self.loadWallets()
@@ -541,18 +587,6 @@ export default {
         })
       }
     });
-
-    // this.socialClaimContract.on("VerificationResult", (addr, verified) => {
-    //   if (address.value === addr) {
-    //     _self.state = (verified ? 'verificationSuccessful' : 'VerificationError')
-    //     _self.twitter.url = ''
-    //     _self.tiktok.url = ''
-    //     _self.twitch.url = ''
-    //     _self.errorState = false
-    //     _self.challenge = ''
-    //     _self.linkAmount = null
-    //   }
-    // });
   },
   data() {
     return {
@@ -564,18 +598,37 @@ export default {
       challenge: "",
       linkAmount: .2,
       tab: 0,
+      transactions: [],
       showGif: false,
       isActivated: false,
       wallet: null,
       wallets: [],
-      walletsURLs: [],
       selectedWallet: null,
       withdrawAddress: null,
       error: "unknown error, please try again",
-      twitter: {url: ""}
+      twitter: {url: ""},
+      tooltips: [false,false,false,false,false]
     };
   },
   methods: {
+    selectWalletToClaim(item) {
+      const _self = this
+      const claimWallet = this.wallets.find(function(wallet){ return wallet.id === item.id})
+      this.axios.get(`${this.socialClaimApiURL}/wallets/${claimWallet.id}`)
+          .then(function (response) {
+            _self.tab = 1
+            _self.selectedWallet = JSON.parse(response.data).result
+          })
+          .catch(function () {
+          }).then(function(){
+      })
+    },
+    toggleTooltip(index, show) {
+      this.tooltips[index] = show
+    },
+    itemProjectionFunction(item) {
+      return (item.description)
+    },
     toggleGif() {
       this.showGif = !this.showGif
     },
@@ -583,11 +636,26 @@ export default {
       this.tab = tab
       this.state = 'init'
     },
+    refreshTransactions() {
+      const _self = this
+      this.axios.get(`${this.socialClaimApiURL}/wallets/${this.selectedWallet.id}/events`)
+          .then(function (response) {
+            let results = JSON.parse(response.data).result
+            results = results.filter(function(r){
+              return (r.type === "OUTGOING_TRANSACTION");
+            })
+            if (results.length > 0) {
+              _self.transactions = results.map(function(r){
+                return (JSON.parse(r.metadata))
+              })
+            }
+          })        .catch(function (err) {
+        console.log(err)
+      })
+    },
     requestWithdrawal(){
       let _self = this
       let id = this.selectedWallet.id.replace(/-/g,'')
-
-      console.log(id)
       id = ethers.utils.toUtf8Bytes(id);
       try {
         const { signer } = useEthers()
@@ -619,11 +687,11 @@ export default {
     },
     selectItemEventHandler(item) {
       const _self = this
-      const claimWallet = this.wallets.find(function(wallet){ return wallet.description === item})
+      const claimWallet = this.wallets.find(function(wallet){ return wallet.id === item.id})
       this.axios.get(`${this.socialClaimApiURL}/wallets/${claimWallet.id}`)
           .then(function (response) {
-            console.log(response)
             _self.selectedWallet = JSON.parse(response.data).result
+            _self.refreshTransactions()
           })
           .catch(function () {
           }).then(function(){
@@ -635,7 +703,6 @@ export default {
       this.axios.get(this.socialClaimApiURL+'/wallets')
           .then(function (response) {
             _self.wallets = JSON.parse(response.data).result.slice().reverse()
-            _self.walletsURLs = _self.wallets.map(function(w) { return w.description })
             if (_self.tab === 1)
               _self.state = 'afterSelectWalletToClaim'
             _self.walletsErrorState = false
