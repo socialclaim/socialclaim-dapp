@@ -4,6 +4,8 @@
       <span class="font-medium">There was an error fetching wallets</span>
     </div>
   </div>
+
+  
 </template>
 <script>
 import { copyText } from 'vue3-clipboard'

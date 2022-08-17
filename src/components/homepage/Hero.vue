@@ -149,15 +149,15 @@
 </style>
 <template>
   <section id="verify" >
-    <div class=" text-white grid grid-cols-1 md:grid-cols-2 px-4  pb-20 gap-6 mx-auto max-w-screen-lg">
-      <div class="mt-12" v-if="!isActivated">
-        <div class="font-bold leading-relaxed mt-14 lg:text-5xl ">
+    <div class=" text-white grid grid-cols-1 md:grid-cols-2 px-4  md:pb-20 gap-6 mx-auto max-w-screen-lg">
+      <div class="md:mt-12" v-if="!isActivated">
+        <div class="font-bold mt-14 text-4xl lg:text-5xl ">
           We empower ✊ people to <span class="text-secondary">fundraise</span> for <span class=" text-secondarymedium underline">charities</span> and individuals
         </div>
         <h2 class="text-md md:text-2xl">> Trusted, secure and decentralised</h2>
       </div>
       <div v-if="isActivated">
-        <div   class="md:mt-20 rounded-lg">
+        <div   class="md:mt-20 rounded-lg hidden md:block">
           <div class="w-full relative">
             <vue-collapsible-panel-group accordion >
               <vue-collapsible-panel :expanded="false">
@@ -211,11 +211,11 @@
         </div>
 
         <div class="md:mt-6 relative cursor-pointer outline-none">
-          <div class="w-full relative h-80 ">
+          <div class="w-full relative h-80 hidden md:block ">
 
             <div class="absolute right-0 top-1 w-full h-full rounded-lg bg-secondarymedium"></div>
             <div class="absolute right-2 top-0 w-full h-full rounded-lg bg-tertiary"></div>
-            <div class="absolute overflow-y-scroll w-full h-full z-10 right-1 top-1 hidden text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow dark:bg-secondary sm:flex dark:divide-gray-700 dark:text-gray-400">
+            <div class="absolute overflow-y-scroll w-full h-full z-10 right-1 top-1  text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow dark:bg-secondary sm:flex dark:divide-gray-700 dark:text-gray-400">
 
               <div class="w-full relative shadow-md sm:rounded-lg">
                 <div  class="text-white p-4 ">Latest wallets up for grabs</div>
@@ -265,7 +265,7 @@
           <div class="absolute right-0 top-1 w-full h-full rounded-lg bg-secondarymedium"></div>
           <div class="absolute right-2 top-0 w-full h-full rounded-lg bg-tertiary"></div>
 
-          <ul class="absolute w-full z-10 right-1 top-1 hidden text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+          <ul class="absolute w-full z-10 right-1 top-1  text-lg font-medium text-center text-gray-500 rounded-lg divide-x divide-gray-200 shadow flex dark:divide-gray-700 dark:text-gray-400">
             <li class="w-full">
               <a href="#" @click="setTab(0)" class="inline-block p-4 w-full text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-tertiary active focus:outline-none dark:bg-secondary" aria-current="page"><span :class="tab === 0 ? 'text-white' : 'text-gray-400'">Create a wallet</span></a>
             </li>
@@ -276,22 +276,22 @@
         </div>
         <div class="px-4 pt-4 bg-white mt-5 rounded-lg border shadow-md  dark:bg-secondary dark:border-gray-700">
           <div class="flex  items-center mb-2 pb-2 border-b-4 border-secondarymedium">
-            <img src="/images/logos/wallet.svg"  class=" pt-2 text-white block object-contain h-16" />
+            <img src="/images/logos/wallet.svg"  class="hidden md:block pt-2 text-white block object-contain h-16" />
             <div v-if="!isActivated" >
               <a @click="open">
                 <h5 class="ml-3 text-xl  leading-none text-gray-900 dark:text-white">Wallet not connected<br />
                   <span  class="text-xs text-gray-300 font-light">Connect with metamask</span></h5>
               </a>
             </div>
-            <div v-else class="flex items-center">
-              <h5 class="ml-3 text-xl  leading-none text-gray-900 dark:text-white">{{  shortenAddress(address) }}<br />
+            <div v-else class="md:flex items-center">
+              <h5 class="hidden md:block ml-3 text-xl  leading-none text-gray-900 dark:text-white">{{  shortenAddress(address) }}<br />
                 <span class="text-xs text-gray-300 font-light">{{ displayEther(balance) }} MATIC</span></h5>
-              <div class="flex-col ml-10">
+              <div class="flex-col md:ml-10">
                 <div>
                   <label for="transfer" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
                   <div class="relative">
                     <input type="number" step=".1" id="transfer" v-model="linkAmount" class="focus:ring-tertiary block p-4  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-tertiary focus-border-tertiary dark:bg-tertiary dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="0.2" required>
-                    <button @click="transfer()" class="text-white absolute right-2.5 bottom-2.5 bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-tertiary font-medium rounded-lg text-sm px-4 py-2 dark:bg-secondary dark:hover:text-black dark:hover:bg-secondarymedium" >Send $LINK</button>
+                    <button @click="transfer()" class="text-xs md:text-sm text-white absolute right-2.5 bottom-2.5 bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-tertiary font-medium rounded-lg  px-4 py-2 dark:bg-secondary dark:hover:text-black dark:hover:bg-secondarymedium" >Send $LINK</button>
                   </div>
                 </div>
                 <div>
@@ -400,14 +400,14 @@
                 <div class="mt-5" v-if="selectedWallet && !walletLoading">
 
                   <div >
-                    <div class="w-full relative h-24">
+                    <div class="w-full md:relative md:h-24">
 
-                      <div class="absolute right-0 top-1 mt-1 w-full h-full rounded-lg bg-secondarymedium"></div>
-                      <div class="absolute right-2 top-0 mt-1 w-full h-full rounded-lg bg-tertiary"></div>
+                      <div class="hidden md:block absolute right-0 top-1 mt-1 w-full h-full rounded-lg bg-secondarymedium"></div>
+                      <div class="hidden md:block absolute right-2 top-0 mt-1 w-full h-full rounded-lg bg-tertiary"></div>
 
-                      <div class=" absolute w-full h-20 mt-2 z-10 right-1 top-1  text-lg font-medium  text-gray-500 rounded-lg  shadow   dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
-                        <div class="w-full divide-x divide-tertiary flex h-full">
-                          <img src="/images/logos/wallet.svg"  class=" pt-2 text-white block object-contain h-16" />
+                      <div class=" md:absolute w-full h-20 mt-2 z-10 right-1 top-1  text-lg font-medium  text-gray-500 rounded-lg  shadow   dark:bg-secondary dark:divide-gray-700 dark:text-gray-400">
+                        <div class="w-full divide-x divide-tertiary md:flex md:h-full">
+                          <img src="/images/logos/wallet.svg"  class="hidden md:block pt-2 text-white block object-contain h-16" />
                           <div class="flex items-center">
                             <h5 class="ml-3 mr-3 text-xl  leading-none text-gray-900 dark:text-white">{{shortenAddress(selectedWallet.address)}}<br/>
                               <span class="text-xs text-gray-300 font-light">{{ selectedWallet.balance.balance }} MATIC</span><br />
