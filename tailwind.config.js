@@ -15,7 +15,7 @@ module.exports = {
         secondarylight: '#cfd4f8',
         secondarysuperlight: '#eceff8',
         lightbrown: '#a33c02',
-        tertiary: '#ff9719ff',
+        tertiary: '#ff9719',
         unclaimed: '#fb8500ff'
       }
     }
