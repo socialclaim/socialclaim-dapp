@@ -4,7 +4,8 @@
 [socialclaim.nescrypto.com](https://socialclaim.nescrypto.com)
 
 ## How to use video
-#TODO
+[See on youtube](https://youtu.be/pEiFCjh4NeU)
+
 
 ## Project setup
 ```shell
