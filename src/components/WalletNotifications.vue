@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  
+
 </template>
 <script>
 import { copyText } from 'vue3-clipboard'
